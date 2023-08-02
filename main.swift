@@ -25,7 +25,7 @@ struct Problem {
     let input: String
 }
 
-let day = Day02()
+let day = Day03()
 let resultPart1 = day.solvePart1()
 
 print("Part 1: \(resultPart1)")
