@@ -15,8 +15,8 @@ let inputString = "https://adventofcode.com/2015/day/1/input"
 
 protocol Solving {
     var input: String { get }
-    func solvePart1() -> String
-    func solvePart2() -> String
+    func solvePart1() async -> String
+    func solvePart2() async -> String
 }
 
 struct Problem {
@@ -25,12 +25,12 @@ struct Problem {
     let input: String
 }
 
-let day = Day03()
-let resultPart1 = day.solvePart1()
+let day = Day06()
+let resultPart1 =  await day.solvePart1()
 
 print("Part 1: \(resultPart1)")
 
-let resultPart2 = day.solvePart2()
+let resultPart2 = await day.solvePart2()
 print("Part 2: \(resultPart2)")
 //var years: [Year] = []
 //for year in (2015...2022) {

@@ -20,7 +20,6 @@ struct Day03: Solving {
     }
 
     func apply(direction: Character, to state: inout State) {
-
         state.0.insert("\(state.1.x),\(state.1.y)")
         switch direction {
         case "^":
