@@ -45,7 +45,7 @@ class Day09: Solving {
         Array(self.map.cities.permutations(ofCount: self.map.cities.count))
     }()
 
-    func findDistance(startingValue: Int, _ transformer: (Int, Int) -> Int) -> Int {
+    func findDistance(startingValue: Int, _ reducer: (Int, Int) -> Int) -> Int {
         var distance = startingValue
         for path in possiblePaths {
             var distanceForPermutation = 0
@@ -53,7 +53,7 @@ class Day09: Solving {
                 distanceForPermutation += self.map.distances[[firstCity, secondCity]]!
             }
 
-            distance = transformer(distance, distanceForPermutation)
+            distance = reducer(distance, distanceForPermutation)
         }
         return distance
     }
