@@ -11,4 +11,8 @@ extension String {
     var lines: [String.SubSequence] {
         self.split(separator: "\n")
     }
+
+    func lines<Regex: RegexComponent>(matching regex: Regex) -> [Regex.RegexOutput] {
+        self.lines.map { $0.firstMatch(of: regex)!.output }
+    }
 }
