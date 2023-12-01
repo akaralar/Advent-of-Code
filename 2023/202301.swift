@@ -21,15 +21,7 @@ extension Solution: Solving where Day == D01, Year == Y2023 {
     }
 
     func solvePart2() -> String {
-        return input.lines.reduce(0) { partialResult, next in
-            let first = findFirstDigit(next)
-            let last = findLastDigit(next)
-            return Int("\(first)\(last)")! + partialResult
-        }.asString
-    }
-
-    func findFirstDigit(_ line: String.SubSequence) -> Character {
-        let valid: [String: Character] = [
+        let mapping: [String: Character] = [
             "one": "1",
             "two": "2",
             "three": "3",
@@ -41,88 +33,50 @@ extension Solution: Solving where Day == D01, Year == Y2023 {
             "nine": "9"
         ]
 
-        var temp: String = ""
-        for c in line {
+        let reverseMapping = mapping.reduce(into: [:]) { partial, next in
+            partial[String(next.key.reversed())] = next.value
+        }
+
+        return input.lines.reduce(0) { partialResult, next in
+            let first = findFirstDigit(next, mapping: mapping)
+            let last = findLastDigit(next, mapping: mapping)
+            return Int("\(first)\(last)")! + partialResult
+        }.asString
+    }
+
+    func findFirstDigit(_ line: String.SubSequence, mapping: [String: Character]) -> Character {
+        let numbersByFirstLetter = Dictionary(grouping: mapping.keys, by: \.first!)
+
+        var temp = line
+        while !temp.isEmpty {
+            let c = temp.first!
             if c.isNumber { return c }
-            
-            if !temp.isEmpty {
-                let testSet: Set<Character> = valid.keys
-                    .filter { $0.hasPrefix(temp) }
-                    .map { $0.replacingOccurrences(of: temp, with: "") }
-                    .compactMap { $0.first }
-                    .reduce(into: []) { partial, next in partial.insert(next) }
-                if testSet.contains(c) {
-                    temp.append(c)
-                } else {
-                    temp.removeAll()
+            if let possibleNumbers = numbersByFirstLetter[c] {
+                for number in possibleNumbers where temp.hasPrefix(number) {
+                    return mapping[number]!
                 }
             }
-
-            if temp.isEmpty {
-                let testSet = valid.keys
-                    .compactMap(\.first)
-                    .reduce(into: Set<Character>()) { partial, next in partial.insert(next) }
-
-                if testSet.contains(c) {
-                    temp.append(c)
-                }
-
-            } 
-
-            if let char = valid[temp] {
-                return char
-            }
+            temp.removeFirst()
         }
 
         fatalError()
     }
 
-    func findLastDigit(_ line: String.SubSequence) -> Character {
-        let valid: [String: Character] = [
-            "eno": "1",
-            "owt": "2",
-            "eerht": "3",
-            "ruof": "4",
-            "evif": "5",
-            "xis": "6",
-            "neves": "7",
-            "thgie": "8",
-            "enin": "9"
-        ]
+    func findLastDigit(_ line: String.SubSequence, mapping: [String: Character]) -> Character {
+        let numbersByLastLetter = Dictionary(grouping: mapping.keys, by: \.last!)
 
-        var temp: String = ""
-        for c in line.reversed() {
+        var temp = line
+        while !temp.isEmpty {
+            let c = temp.last!
             if c.isNumber { return c }
-
-            if !temp.isEmpty {
-                let testSet: Set<Character> = valid.keys
-                    .filter { $0.hasPrefix(temp) }
-                    .map { $0.replacingOccurrences(of: temp, with: "") }
-                    .compactMap(\.first)
-                    .reduce(into: []) { partial, next in partial.insert(next) }
-                if testSet.contains(c) {
-                    temp.append(c)
-                } else {
-                    temp.removeAll()
+            if let possibleNumbers = numbersByLastLetter[c] {
+                for number in possibleNumbers where temp.hasSuffix(number) {
+                    return mapping[number]!
                 }
             }
-
-            if temp.isEmpty {
-                let testSet = valid.keys
-                    .compactMap(\.first)
-                    .reduce(into: Set<Character>()) { partial, next in partial.insert(next) }
-
-                if testSet.contains(c) {
-                    temp.append(c)
-                }
-
-            }
-
-            if let char = valid[temp] {
-                return char
-            }
+            temp.removeLast()
         }
-
+        
         fatalError()
     }
 
