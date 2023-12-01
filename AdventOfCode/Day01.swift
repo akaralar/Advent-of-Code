@@ -8,6 +8,9 @@
 import Foundation
 
 public struct Day01: Solving {
+    typealias Year = Y2015
+    typealias Day = D01
+
     func solvePart1() -> String {
         String(
             input.reduce(0) { partialResult, char in

@@ -6,17 +6,11 @@
 //
 
 import Foundation
-import CryptoKit
-
-func MD5(string: String) -> String {
-    let digest = Insecure.MD5.hash(data: Data(string.utf8))
-
-    return digest.map {
-        String(format: "%02hhx", $0)
-    }.joined()
-}
 
 struct Day04: Solving {
+    typealias Year = Y2015
+    typealias Day = D04
+
     func solvePart1() -> String {
         return String(findFirstHash(with: "00000"))
     }

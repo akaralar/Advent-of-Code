@@ -8,6 +8,9 @@
 import Foundation
 
 struct Day03: Solving {
+    typealias Year = Y2015
+    typealias Day = D03
+
     typealias State = (Set<String>, CGPoint)
 
     func solvePart1() -> String {
