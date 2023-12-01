@@ -21,7 +21,7 @@ extension Solution: Solving where Day == D01, Year == Y2023 {
     }
 
     func solvePart2() -> String {
-        let mapping: [String: Character] = [
+        let digitMapping: [String: Character] = [
             "one": "1",
             "two": "2",
             "three": "3",
@@ -33,50 +33,32 @@ extension Solution: Solving where Day == D01, Year == Y2023 {
             "nine": "9"
         ]
 
-        let reverseMapping = mapping.reduce(into: [:]) { partial, next in
-            partial[String(next.key.reversed())] = next.value
+        let reverseMapping = digitMapping.reduce(into: [:]) { result, next in
+            result[String(next.key.reversed())] = next.value
         }
 
         return input.lines.reduce(0) { partialResult, next in
-            let first = findFirstDigit(next, mapping: mapping)
-            let last = findLastDigit(next, mapping: mapping)
+            let first = firstDigit(next, digitTable: digitMapping)
+            let last = firstDigit(String(next.reversed()), digitTable: reverseMapping)
             return Int("\(first)\(last)")! + partialResult
         }.asString
     }
 
-    func findFirstDigit(_ line: String.SubSequence, mapping: [String: Character]) -> Character {
-        let numbersByFirstLetter = Dictionary(grouping: mapping.keys, by: \.first!)
+    func firstDigit(_ line: any StringProtocol, digitTable: [String: Character]) -> Character {
+        let spellingTable = Dictionary(grouping: digitTable.keys, by: \.first!)
 
-        var temp = line
-        while !temp.isEmpty {
-            let c = temp.first!
+        var stringToSearch = String(line)
+        while !stringToSearch.isEmpty {
+            let c = stringToSearch.first!
             if c.isNumber { return c }
-            if let possibleNumbers = numbersByFirstLetter[c] {
-                for number in possibleNumbers where temp.hasPrefix(number) {
-                    return mapping[number]!
+            if let possibleSpellings = spellingTable[c] {
+                for spelling in possibleSpellings where stringToSearch.hasPrefix(spelling) {
+                    return digitTable[spelling]!
                 }
             }
-            temp.removeFirst()
+            stringToSearch.removeFirst()
         }
 
-        fatalError()
-    }
-
-    func findLastDigit(_ line: String.SubSequence, mapping: [String: Character]) -> Character {
-        let numbersByLastLetter = Dictionary(grouping: mapping.keys, by: \.last!)
-
-        var temp = line
-        while !temp.isEmpty {
-            let c = temp.last!
-            if c.isNumber { return c }
-            if let possibleNumbers = numbersByLastLetter[c] {
-                for number in possibleNumbers where temp.hasSuffix(number) {
-                    return mapping[number]!
-                }
-            }
-            temp.removeLast()
-        }
-        
         fatalError()
     }
 
