@@ -201,11 +201,11 @@ class Day07: Solving {
         return signal
     }
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         return String(signal(for: "a", wires: schema))
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         let signalA = signal(for: "a", wires: schema)
         schema["b"] = Wire(id: "b", input: .custom(signalA))
         signalCache = [:]

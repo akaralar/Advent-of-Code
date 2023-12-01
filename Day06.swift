@@ -37,7 +37,7 @@ struct Day06: Solving {
         }
     }
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         var result: Set<Point> = []
 
         for line in input.lines {
@@ -67,7 +67,7 @@ struct Day06: Solving {
         return "\(result.count)"
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         var result: Dictionary<Point, Int> = [:]
 
         for line in input.lines {

@@ -8,7 +8,7 @@
 import Foundation
 
 class Day12: Solving {
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         do {
             let serialized = try JSONSerialization.jsonObject(with: input.data(using: .utf16)!)
             let total = calculateTotal(for: serialized, predicate: { _ in true })
@@ -20,7 +20,7 @@ class Day12: Solving {
         return ""
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         do {
             let serialized = try JSONSerialization.jsonObject(with: input.data(using: .utf16)!)
             let total = calculateTotal(for: serialized, predicate: {

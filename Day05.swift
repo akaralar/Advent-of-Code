@@ -9,7 +9,7 @@ import Foundation
 import Algorithms
 
 struct Day05: Solving {
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         let vowels: Set<Character> = ["a", "e", "i", "o", "u"]
         let denyList: Set<String> = ["ab", "cd", "pq", "xy"]
 
@@ -34,7 +34,7 @@ struct Day05: Solving {
         return String(niceLines)
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
 
         var niceLines: Int = 0
         input.enumerateLines { line, stop in

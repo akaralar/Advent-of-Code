@@ -41,7 +41,7 @@ class Day14: Solving {
     let seconds = 2503
     lazy var reindeers = input.lines(matching: regex)
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         let max = distances(
             after: seconds,
             reindeers: reindeers
@@ -51,7 +51,7 @@ class Day14: Solving {
 
         return String(max)
     }
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         var points: [String: Int] = [:]
         for i in (1...seconds) {
             let distances = distances(after: i, reindeers: reindeers)

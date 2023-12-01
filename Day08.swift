@@ -28,7 +28,7 @@ struct Day08: Solving {
         }
     }
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         var diff = 0
         for line in input.lines {
             let trimmed = line.dropFirst().dropLast()
@@ -57,7 +57,7 @@ struct Day08: Solving {
         return String(diff)
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         var diff = 0
         for line in input.lines {
             diff += line.filter { $0 == "\"" || $0 == "\\" }.count + 2

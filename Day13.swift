@@ -35,11 +35,11 @@ class Day13: Solving {
     }
     .anchorsMatchLineEndings()
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         return String(calculateHappiness(from: input, includingMyself: false))
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         return String(calculateHappiness(from: input, includingMyself: true))
     }
 

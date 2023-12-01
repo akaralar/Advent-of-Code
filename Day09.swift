@@ -58,11 +58,11 @@ class Day09: Solving {
         return distance
     }
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         return String(findDistance(startingValue: .max, min))
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         return String(findDistance(startingValue: .min, max))
     }
 

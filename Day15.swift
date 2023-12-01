@@ -63,7 +63,7 @@ class Day15: Solving {
     }
         .anchorsMatchLineEndings()
 
-    func solvePart1() async -> String {
+    func solvePart1() -> String {
         let ingredients = input.lines(matching: regex)
         let totaling100: [[Int]] = cartesianProduct(
             values: Array(1...100),
@@ -80,7 +80,7 @@ class Day15: Solving {
         return "\(maxScore)"
     }
 
-    func solvePart2() async -> String {
+    func solvePart2() -> String {
         let ingredients = input.lines(matching: regex)
         let totaling100: [[Int]] = cartesianProduct(
             values: Array(1...100),
@@ -126,20 +126,13 @@ class Day15: Solving {
 
         var maxScore = 0
         for distribution in amounts {
-            var capacity = 0
-            var durability = 0
-            var flavor = 0
-            var texture = 0
-            var calories = 0
-
+            var capacity = 0, durability = 0, flavor = 0, texture = 0, calories = 0
             for i in 0..<ingredients.count {
-                let ingredient = ingredients[i]
-                let amount = distribution[i]
-                capacity += amount * ingredient.2
-                durability += amount * ingredient.3
-                flavor += amount * ingredient.4
-                texture += amount * ingredient.5
-                calories += amount * ingredient.6
+                capacity += distribution[i] * ingredients[i].2
+                durability += distribution[i] * ingredients[i].3
+                flavor += distribution[i] * ingredients[i].4
+                texture += distribution[i] * ingredients[i].5
+                calories += distribution[i] * ingredients[i].6
             }
 
             guard predicate(capacity, durability, flavor, texture, calories) else {
