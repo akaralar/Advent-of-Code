@@ -16,3 +16,9 @@ extension String {
         self.lines.map { $0.firstMatch(of: regex)!.output }
     }
 }
+
+extension Int {
+    var asString: String {
+        String(self)
+    }
+}
