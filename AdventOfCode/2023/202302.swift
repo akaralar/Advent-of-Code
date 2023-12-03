@@ -11,45 +11,35 @@ struct S2302: Solving {
     typealias Year = Y2023
     typealias Day = D02
 
+    let gameIDRegex = /Game (\d+)/
+    let cubesRegex = /(\d+) (green|blue|red)/
 
     func solvePart1() -> String {
-        let loaded: [String: Int] = [
+        let limits: [Substring: Int] = [
             "green": 13,
             "blue": 14,
             "red": 12
         ]
 
-        let gameIDRegex = /Game (\d+)/
-        let cubesRegex = /(\d+) (green|blue|red)/
-
-        var idTotal = 0
-        outer: for line in input.lines {
+        return input.lines.reduce(0) { sum, line in
             let (_, gameID) = line.firstMatch(of: gameIDRegex)!.output
             for match in line.matches(of: cubesRegex) {
                 let (_, number, color) = match.output
-                if loaded[String(color)]! < Int(number)! { continue outer }
+                if limits[color]! < Int(number)! { return sum }
             }
-
-            idTotal += Int(gameID)!
-        }
-        return String(idTotal)
+            return sum + Int(gameID)!
+        }.asString
     }
 
     func solvePart2() -> String {
-        let cubesRegex = /(\d+) (green|blue|red)/
-
-        var powerTotal = 0
-
-        for line in input.lines {
+        return input.lines.reduce(0) { sum, line in
             var maxes: [Substring: Int] = [:]
             for match in line.matches(of: cubesRegex) {
                 let (_, number, color) = match.output
                 maxes[color] = max(maxes[color, default: 0], Int(number)!)
             }
-            powerTotal += maxes.values.reduce(1, *)
-        }
-
-        return String(powerTotal)
+            return sum + maxes.values.reduce(1, *)
+        }.asString
     }
 
     var input: String {
