@@ -8,6 +8,9 @@
 import Foundation
 
 class Day18: Solving {
+    typealias Year = Y2015
+    typealias Day = D18
+
     func solvePart1() -> String {
         var grid = input.lines.map { Array($0) }
         state(after: 100, grid: &grid)

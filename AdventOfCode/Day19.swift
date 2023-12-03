@@ -63,6 +63,9 @@ extension Array where Element == Matter {
 }
 
 class Day19: Solving {
+    typealias Year = Y2015
+    typealias Day = D19
+
     var regex1 = /^(\w+) => ([A-Z][a-z]?)([A-Z][a-z]?)$/
     var regex2 = /([A-Z][a-z]?)/
     lazy var replacementsAndMolecule: (replacements: [(Matter, Molecule)], molecule: Molecule) = {

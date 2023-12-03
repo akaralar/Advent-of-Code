@@ -9,6 +9,9 @@ import Foundation
 import RegexBuilder
 
 class Day14: Solving {
+    typealias Year = Y2015
+    typealias Day = D14
+
     let regex = Regex {
         /^/
         Capture {

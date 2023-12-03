@@ -8,6 +8,9 @@
 import Foundation
 
 class Day10: Solving {
+    typealias Year = Y2015
+    typealias Day = D10
+
     func solve(input: String, iterations: Int) -> String {
         var nextInput = input
         var result: String = ""
