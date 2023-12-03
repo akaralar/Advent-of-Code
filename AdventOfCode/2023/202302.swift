@@ -23,8 +23,7 @@ struct S2302: Solving {
 
         return input.lines.reduce(0) { sum, line in
             let (_, gameID) = line.firstMatch(of: gameIDRegex)!.output
-            for match in line.matches(of: cubesRegex) {
-                let (_, number, color) = match.output
+            for (_, number, color) in line.matches(of: cubesRegex).lazy.map(\.output) {
                 if limits[color]! < Int(number)! { return sum }
             }
             return sum + Int(gameID)!
@@ -34,8 +33,7 @@ struct S2302: Solving {
     func solvePart2() -> String {
         return input.lines.reduce(0) { sum, line in
             var maxes: [Substring: Int] = [:]
-            for match in line.matches(of: cubesRegex) {
-                let (_, number, color) = match.output
+            for (_, number, color) in line.matches(of: cubesRegex).lazy.map(\.output) {
                 maxes[color] = max(maxes[color, default: 0], Int(number)!)
             }
             return sum + maxes.values.reduce(1, *)
