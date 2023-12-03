@@ -35,6 +35,7 @@
 		57DA2AA52A8E809B008A10E6 /* Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA2AA42A8E809B008A10E6 /* Day14.swift */; };
 		57DA2AA72A8EEB98008A10E6 /* Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA2AA62A8EEB98008A10E6 /* Day15.swift */; };
 		57EEFCDF2B1A73590052F051 /* 202302.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCDE2B1A73590052F051 /* 202302.swift */; };
+		57EEFCE22B1C95FA0052F051 /* 202303.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCE12B1C95FA0052F051 /* 202303.swift */; };
 		57FD54B22A857A7500A3336A /* Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD54B12A857A7500A3336A /* Day12.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		57DA2AA42A8E809B008A10E6 /* Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day14.swift; sourceTree = "<group>"; };
 		57DA2AA62A8EEB98008A10E6 /* Day15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day15.swift; sourceTree = "<group>"; };
 		57EEFCDE2B1A73590052F051 /* 202302.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202302.swift; sourceTree = "<group>"; };
+		57EEFCE12B1C95FA0052F051 /* 202303.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202303.swift; sourceTree = "<group>"; };
 		57FD54B12A857A7500A3336A /* Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day12.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			children = (
 				576602942B19E17C006253D9 /* 202301.swift */,
 				57EEFCDE2B1A73590052F051 /* 202302.swift */,
+				57EEFCE12B1C95FA0052F051 /* 202303.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				57AC47722A79CDA7003A5B5A /* main.swift in Sources */,
 				576602952B19E17C006253D9 /* 202301.swift in Sources */,
 				57AC47792A79D4DC003A5B5A /* Day01.swift in Sources */,
+				57EEFCE22B1C95FA0052F051 /* 202303.swift in Sources */,
 				57AC478A2A79E200003A5B5A /* Day02.swift in Sources */,
 				57D00AC42A7F36B6008809F9 /* Parsing.swift in Sources */,
 				57D00ACC2A81E9CF008809F9 /* Day10.swift in Sources */,
