@@ -62,7 +62,7 @@ struct S2303: Solving {
                 if idx > lines.startIndex { linesToCheck.append(lines[idx-1]) }
                 if idx < lines.endIndex - 1 { linesToCheck.append(lines[idx+1]) }
 
-                let neighboringSymbols = linesToCheck
+                let matchedNeigbors = linesToCheck
                     .flatMap { lineToCheck in
                         let neighborRange = match.range
                             .intRange(line)
@@ -74,7 +74,7 @@ struct S2303: Solving {
                             .map { $0.output }
                     }
                 let regexMatch = RegexMatch(range: match.range, output: match.output)
-                result[regexMatch] = neighboringSymbols
+                result[regexMatch] = matchedNeigbors
             }
         }
         return result
