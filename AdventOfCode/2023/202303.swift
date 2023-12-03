@@ -21,9 +21,13 @@ extension Range where Bound == String.Index {
     func intRange(_ s: any StringProtocol) -> Range<Int> {
         let lowerDistance = s.distance(from: s.startIndex, to: lowerBound)
         let upperDistance = s.distance(from: s.startIndex, to: upperBound)
-
         return lowerDistance ..< upperDistance
     }
+}
+
+struct RegexMatch<Output: Equatable & Hashable>: Equatable, Hashable {
+    var range: Range<String.Index>
+    var output: Output
 }
 
 struct S2303: Solving {
@@ -33,68 +37,49 @@ struct S2303: Solving {
     let gearRegex = /\*/
 
     func solvePart1() -> String {
-        let lines = input.lines
-
-        var sum = 0
-        for (idx, line) in zip(lines.indices, lines)  {
-            for match in line.matches(of: numberRegex) {
-                let number = match.output
-                
-                var linesToCheck: [Substring] = [line]
-                if idx > lines.startIndex { linesToCheck.append(lines[idx-1]) }
-                if idx < lines.endIndex - 1 { linesToCheck.append(lines[idx+1]) }
-
-                let hasSymbol = !linesToCheck
-                    .map { lineToCheck in
-                        let range = match.range
-                            .intRange(line)
-                            .expand(by: 1, max: line.count)
-                            .stringRange(lineToCheck)
-                        return lineToCheck[range]
-                    }
-                    .allSatisfy { $0.firstMatch(of: symbolRegex) == nil }
-
-                if hasSymbol {
-                    sum += Int(number)!
-                }
-            }
-        }
-
-        return String(sum)
+        itemsAndNeighbors(matching: numberRegex, withNeigborsMatching: symbolRegex, in: input.lines)
+            .filter { !$0.value.isEmpty }
+            .reduce(0) { sum, next in sum + Int(next.key.output)! }
+            .asString
     }
-    
+
     func solvePart2() -> String {
-        let lines = input.lines
+        itemsAndNeighbors(matching: gearRegex, withNeigborsMatching: numberRegex, in: input.lines)
+            .filter { $0.value.count == 2 }
+            .reduce(0) { sum, next in sum + (Int(next.value[0])! * Int(next.value[1])!) }
+            .asString
+    }
 
-        var sum = 0
+    func itemsAndNeighbors<R1: RegexComponent, R2: RegexComponent>(
+        matching regex: R1,
+        withNeigborsMatching neighborRegex: R2,
+        in lines: [Substring]
+    ) -> [RegexMatch<R1.RegexOutput>: [R2.RegexOutput]] {
+        var result: [RegexMatch<R1.RegexOutput>: [R2.RegexOutput]] = [:]
         for (idx, line) in zip(lines.indices, lines)  {
-            for match in line.matches(of: gearRegex) {
-                let number = match.output
-
+            for match in line.matches(of: regex) {
                 var linesToCheck: [Substring] = [line]
                 if idx > lines.startIndex { linesToCheck.append(lines[idx-1]) }
                 if idx < lines.endIndex - 1 { linesToCheck.append(lines[idx+1]) }
 
-                let numbersAround = linesToCheck
+                let neighboringSymbols = linesToCheck
                     .flatMap { lineToCheck in
-                        let neighbourRange = match.range
+                        let neighborRange = match.range
                             .intRange(line)
                             .expand(by: 1, max: line.count)
                             .stringRange(lineToCheck)
 
-                        return lineToCheck.matches(of: numberRegex)
-                            .filter { $0.range.overlaps(neighbourRange) }
-                            .map { Int($0.output)! }
+                        return lineToCheck.matches(of: neighborRegex)
+                            .filter { $0.range.overlaps(neighborRange) }
+                            .map { $0.output }
                     }
-
-                if numbersAround.count == 2 {
-                    sum += numbersAround.first! * numbersAround.last!
-                }
+                let regexMatch = RegexMatch(range: match.range, output: match.output)
+                result[regexMatch] = neighboringSymbols
             }
         }
-        return String(sum)
+        return result
     }
-    
+
     var input: String {
 """
 ...317..........214.....................................751.................................630...479..205....41.993............416.........
