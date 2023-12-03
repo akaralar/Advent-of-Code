@@ -25,9 +25,9 @@ extension Range where Bound == String.Index {
     }
 }
 
-struct RegexMatch<Output: Equatable & Hashable>: Equatable, Hashable {
+struct GridRange: Equatable, Hashable {
     var range: Range<String.Index>
-    var output: Output
+    var row: Int
 }
 
 struct S2303: Solving {
@@ -37,9 +37,10 @@ struct S2303: Solving {
     let gearRegex = /\*/
 
     func solvePart1() -> String {
-        itemsAndNeighbors(matching: numberRegex, withNeigborsMatching: symbolRegex, in: input.lines)
+        let lines = input.lines
+        return itemsAndNeighbors(matching: numberRegex, withNeigborsMatching: symbolRegex, in: lines)
             .filter { !$0.value.isEmpty }
-            .reduce(0) { sum, next in sum + Int(next.key.output)! }
+            .reduce(0) { sum, next in sum + Int(lines[next.key.row][next.key.range])! }
             .asString
     }
 
@@ -54,8 +55,8 @@ struct S2303: Solving {
         matching regex: R1,
         withNeigborsMatching neighborRegex: R2,
         in lines: [Substring]
-    ) -> [RegexMatch<R1.RegexOutput>: [R2.RegexOutput]] {
-        var result: [RegexMatch<R1.RegexOutput>: [R2.RegexOutput]] = [:]
+    ) -> [GridRange: [R2.RegexOutput]] {
+        var result: [GridRange: [R2.RegexOutput]] = [:]
         for (idx, line) in zip(lines.indices, lines)  {
             for match in line.matches(of: regex) {
                 var linesToCheck: [Substring] = [line]
@@ -73,7 +74,7 @@ struct S2303: Solving {
                             .filter { $0.range.overlaps(neighborRange) }
                             .map { $0.output }
                     }
-                let regexMatch = RegexMatch(range: match.range, output: match.output)
+                let regexMatch = GridRange(range: match.range, row: idx)
                 result[regexMatch] = matchedNeigbors
             }
         }
