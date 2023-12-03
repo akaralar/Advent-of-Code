@@ -9,9 +9,6 @@ import Foundation
 
 
 struct S2301: Solving {
-    typealias Year = Y2023
-    typealias Day = D01
-
     func solvePart1() -> String {
         return input.lines.reduce(0) { partialResult, next in
             guard

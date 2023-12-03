@@ -8,9 +8,6 @@
 import Foundation
 
 struct S2302: Solving {
-    typealias Year = Y2023
-    typealias Day = D02
-
     let gameIDRegex = /Game (\d+)/
     let cubesRegex = /(\d+) (green|blue|red)/
 

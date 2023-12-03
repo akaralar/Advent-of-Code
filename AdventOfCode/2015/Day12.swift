@@ -8,9 +8,6 @@
 import Foundation
 
 class Day12: Solving {
-    typealias Year = Y2015
-    typealias Day = D12
-
     func solvePart1() -> String {
         do {
             let serialized = try JSONSerialization.jsonObject(with: input.data(using: .utf16)!)

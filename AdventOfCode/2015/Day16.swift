@@ -9,9 +9,6 @@ import Foundation
 import RegexBuilder
 
 class Day16: Solving {
-    typealias Year = Y2015
-    typealias Day = D16
-
     let regex = Regex {
         TryCapture {
           ChoiceOf {

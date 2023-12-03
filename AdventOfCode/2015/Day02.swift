@@ -8,9 +8,6 @@
 import Foundation
 
 struct Day02: Solving {
-    typealias Year = Y2015
-    typealias Day = D02
-
     func solvePart1() -> String {
         let total = input
             .components(separatedBy: "\n")

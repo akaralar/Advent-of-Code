@@ -9,9 +9,6 @@ import Foundation
 import RegexBuilder
 
 struct Day06: Solving {
-    typealias Year = Y2015
-    typealias Day = D06
-
     let regex = Regex {
         TryCapture {
             ChoiceOf {

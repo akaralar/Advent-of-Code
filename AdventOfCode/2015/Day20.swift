@@ -68,9 +68,6 @@ extension Int {
 }
 
 class Day20: Solving {
-    typealias Year = Y2015
-    typealias Day = D20
-
     func runSolution1() -> Int? {
         let target = Int(input)! / 10
         for i in 1...Int.max {

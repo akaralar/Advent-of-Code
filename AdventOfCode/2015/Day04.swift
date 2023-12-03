@@ -8,9 +8,6 @@
 import Foundation
 
 struct Day04: Solving {
-    typealias Year = Y2015
-    typealias Day = D04
-
     func solvePart1() -> String {
         return String(findFirstHash(with: "00000"))
     }

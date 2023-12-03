@@ -7,9 +7,6 @@
 
 import Foundation
 class Day17: Solving {
-    typealias Year = Y2015
-    typealias Day = D17
-
     func solvePart1() -> String {
         let buckets = input.lines.map { Int($0)! }
         let combinations = (0..<buckets.count)

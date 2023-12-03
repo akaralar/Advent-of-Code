@@ -9,9 +9,6 @@ import Foundation
 import RegexBuilder
 
 struct Day08: Solving {
-    typealias Year = Y2015
-    typealias Day = D08
-
     let regex = Regex {
         Capture {
             OneOrMore(.anyOf("\\"))
