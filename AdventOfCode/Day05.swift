@@ -9,6 +9,9 @@ import Foundation
 import Algorithms
 
 struct Day05: Solving {
+    typealias Year = Y2015
+    typealias Day = D05
+
     func solvePart1() -> String {
         let vowels: Set<Character> = ["a", "e", "i", "o", "u"]
         let denyList: Set<String> = ["ab", "cd", "pq", "xy"]
