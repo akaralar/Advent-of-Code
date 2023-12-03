@@ -61,6 +61,9 @@ struct TwoPairsRule: Rule {
 }
 
 class Day11: Solving {
+    typealias Year = Y2015
+    typealias Day = D11
+
     let rules: [any Rule] = [
         StraightThreeRule(),
         DenyListRule(),

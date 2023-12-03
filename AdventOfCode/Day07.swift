@@ -33,6 +33,9 @@ enum Gate {
 }
 
 class Day07: Solving {
+    typealias Year = Y2015
+    typealias Day = D07
+
     let valueRegex = Regex {
         Anchor.startOfLine
         Capture {

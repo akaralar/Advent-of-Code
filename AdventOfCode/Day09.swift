@@ -9,6 +9,9 @@ import Foundation
 import RegexBuilder
 
 class Day09: Solving {
+    typealias Year = Y2015
+    typealias Day = D09
+
     let regex = Regex {
         Capture {
             OneOrMore(CharacterClass(("a"..."z"), ("A"..."Z")))
