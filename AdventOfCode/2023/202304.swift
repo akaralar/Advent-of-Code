@@ -9,11 +9,9 @@ import Foundation
 import RegexBuilder
 
 struct S2304: Solving {
-    let regex = Regex {
-        Capture { OneOrMore(.digit) } transform: { w in Int(w)! }
-    }
+    let regex = Regex { Capture { OneOrMore(.digit) } transform: { w in Int(w)! } }
     func solvePart1() -> String {
-        return input.lines
+        input.lines
             .reduce(0) { sum, line in
                 let numbers = line.split(separator: ":")
                     .flatMap { $0.split(separator: "|") }
@@ -36,9 +34,8 @@ struct S2304: Solving {
                 earned = Set(numbers[1])
                     .intersection(Set(numbers[2]))
                     .enumerated()
-                    .map { card + $0.0 }
                     .reduce(into: earned) { earned, next in
-                        earned[next] += earned[card-1]
+                        earned[card+next.0] += earned[card-1]
                     }
             }
             .reduce(0, +)
