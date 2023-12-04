@@ -32,13 +32,13 @@ struct S2304: Solving {
                 let numbers = line.split(separator: ":")
                     .flatMap { $0.split(separator: "|") }
                     .map { $0.matches(of: regex).map(\.output.1) }
-                let cardIndex = numbers[0][0] - 1
+                let card = numbers[0][0]
                 earned = Set(numbers[1])
                     .intersection(Set(numbers[2]))
                     .enumerated()
-                    .map { cardIndex + 1 + $0.0 }
+                    .map { card + $0.0 }
                     .reduce(into: earned) { earned, next in
-                        earned[next] += earned[cardIndex]
+                        earned[next] += earned[card-1]
                     }
             }
             .reduce(0, +)
