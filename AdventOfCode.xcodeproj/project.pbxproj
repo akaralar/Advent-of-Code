@@ -36,6 +36,7 @@
 		57DA2AA72A8EEB98008A10E6 /* Day15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DA2AA62A8EEB98008A10E6 /* Day15.swift */; };
 		57EEFCDF2B1A73590052F051 /* 202302.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCDE2B1A73590052F051 /* 202302.swift */; };
 		57EEFCE22B1C95FA0052F051 /* 202303.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCE12B1C95FA0052F051 /* 202303.swift */; };
+		57EEFCE42B1DD05A0052F051 /* 202304.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCE32B1DD05A0052F051 /* 202304.swift */; };
 		57FD54B22A857A7500A3336A /* Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD54B12A857A7500A3336A /* Day12.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		57DA2AA62A8EEB98008A10E6 /* Day15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day15.swift; sourceTree = "<group>"; };
 		57EEFCDE2B1A73590052F051 /* 202302.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202302.swift; sourceTree = "<group>"; };
 		57EEFCE12B1C95FA0052F051 /* 202303.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202303.swift; sourceTree = "<group>"; };
+		57EEFCE32B1DD05A0052F051 /* 202304.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202304.swift; sourceTree = "<group>"; };
 		57FD54B12A857A7500A3336A /* Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day12.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				576602942B19E17C006253D9 /* 202301.swift */,
 				57EEFCDE2B1A73590052F051 /* 202302.swift */,
 				57EEFCE12B1C95FA0052F051 /* 202303.swift */,
+				57EEFCE32B1DD05A0052F051 /* 202304.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D00AC22A7F3167008809F9 /* Day06.swift in Sources */,
+				57EEFCE42B1DD05A0052F051 /* 202304.swift in Sources */,
 				57DA2AA72A8EEB98008A10E6 /* Day15.swift in Sources */,
 				5784DA0C2AAA574100E668FA /* Day20.swift in Sources */,
 				57D00ACE2A83EFCC008809F9 /* Day11.swift in Sources */,
