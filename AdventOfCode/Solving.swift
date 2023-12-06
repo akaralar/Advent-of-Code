@@ -8,7 +8,9 @@
 import Foundation
 
 protocol Solving {
-    var input: String { get }
-    func solvePart1() -> String
-    func solvePart2() -> String
+    associatedtype Input
+    associatedtype Output
+    var input: Input { get }
+    func solvePart1() -> Output
+    func solvePart2() -> Output
 }
