@@ -13,7 +13,7 @@ let kDay = 01
 
 let inputString = "https://adventofcode.com/2015/day/1/input"
 
-let solution = S2305()
+let solution = S2306()
 
 let clock = ContinuousClock()
 var resultPart1: String = ""
