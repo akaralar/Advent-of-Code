@@ -39,7 +39,7 @@ struct S2306: Solving {
 
              for time = 7, distance = 9 (first test input)
              a = -1, b = time = 7, c = -distance = -9
-             
+
              (see https://www.desmos.com/calculator/jlq9jbvsiz for a graph)
              */
 
@@ -54,7 +54,7 @@ struct S2306: Solving {
             .compactMap(Int.init)
 
         let (x1, x2) = calculateRoots(Double(timeAndDistance[0]), Double(timeAndDistance[1]))
-        return String((Int(ceil(x1)) ... Int(floor(x2))).count)
+        return String(Int(floor(max(x1, x2)) - ceil(min(x1, x2))) + 1)
     }
 
     var input: String {
