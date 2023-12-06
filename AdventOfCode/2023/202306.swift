@@ -39,6 +39,8 @@ struct S2306: Solving {
 
              for time = 7, distance = 9 (first test input)
              a = -1, b = time = 7, c = -distance = -9
+             
+             (see https://www.desmos.com/calculator/jlq9jbvsiz for a graph)
              */
 
             let x1 = (-time + sqrt(pow(time, 2) - (4 * -1 * -distance))) / -2
