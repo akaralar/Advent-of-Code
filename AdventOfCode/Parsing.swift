@@ -8,11 +8,13 @@
 import Foundation
 import CryptoKit
 
-extension String {
-    var lines: [String.SubSequence] {
+extension StringProtocol {
+    var lines: [Self.SubSequence] {
         self.split(separator: "\n")
     }
+}
 
+extension StringProtocol where Self.SubSequence == Substring {
     func lines<Regex: RegexComponent>(matching regex: Regex) -> [Regex.RegexOutput] {
         self.lines.map { $0.firstMatch(of: regex)!.output }
     }

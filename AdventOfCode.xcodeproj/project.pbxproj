@@ -37,6 +37,7 @@
 		57EEFCDF2B1A73590052F051 /* 202302.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCDE2B1A73590052F051 /* 202302.swift */; };
 		57EEFCE22B1C95FA0052F051 /* 202303.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCE12B1C95FA0052F051 /* 202303.swift */; };
 		57EEFCE42B1DD05A0052F051 /* 202304.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCE32B1DD05A0052F051 /* 202304.swift */; };
+		57EEFCED2B1F2BCD0052F051 /* 202305.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EEFCEC2B1F2BCD0052F051 /* 202305.swift */; };
 		57FD54B22A857A7500A3336A /* Day12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD54B12A857A7500A3336A /* Day12.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		57EEFCDE2B1A73590052F051 /* 202302.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202302.swift; sourceTree = "<group>"; };
 		57EEFCE12B1C95FA0052F051 /* 202303.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202303.swift; sourceTree = "<group>"; };
 		57EEFCE32B1DD05A0052F051 /* 202304.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202304.swift; sourceTree = "<group>"; };
+		57EEFCEC2B1F2BCD0052F051 /* 202305.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202305.swift; sourceTree = "<group>"; };
 		57FD54B12A857A7500A3336A /* Day12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day12.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 				57EEFCDE2B1A73590052F051 /* 202302.swift */,
 				57EEFCE12B1C95FA0052F051 /* 202303.swift */,
 				57EEFCE32B1DD05A0052F051 /* 202304.swift */,
+				57EEFCEC2B1F2BCD0052F051 /* 202305.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				576005E92A91080300A5AC09 /* Day17.swift in Sources */,
 				57AC478C2A79F2F8003A5B5A /* Day03.swift in Sources */,
 				57DA2AA32A8E6FA5008A10E6 /* Day13.swift in Sources */,
+				57EEFCED2B1F2BCD0052F051 /* 202305.swift in Sources */,
 				57DA2AA52A8E809B008A10E6 /* Day14.swift in Sources */,
 				576005E72A9038D800A5AC09 /* Day16.swift in Sources */,
 				57EEFCDF2B1A73590052F051 /* 202302.swift in Sources */,
