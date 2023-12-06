@@ -25,23 +25,23 @@ struct S2306: Solving {
 
     func solvePart2() -> String {
         func calculateRoots(_ time: Double, _ distance: Double) -> (Double, Double) {
-            /* Quadratic solution
+           /* Quadratic solution
              ax^2 + bx + c = 0
              solving for x,
              x1 = (-b + sqrt(b^2 - 4*a*c))/2*a
              x2 = (-b - sqrt(b^2 - 4*a*c))/2*a
 
-             bt = button time, time = total time available
+             bt = button time, time = total time available, dist = current record
 
-             distance  = bt * (time - bt)
-             distance = bt*time - bt^2
-             - bt^2 + bt*time - distance = 0 (our quadratic equation)
+             dist = bt * (time - bt)
+             dist = bt*time - bt^2
+             - bt^2 + bt*time - dist = 0 (our quadratic equation)
 
-             for time = 7, distance = 9 (first test input)
-             a = -1, b = time = 7, c = -distance = -9
+             for time = 7, dist = 9 (first test input)
+             a = -1, b = time = 7, c = -dist = -9
 
              (see https://www.desmos.com/calculator/jlq9jbvsiz for a graph)
-             */
+            */
 
             let x1 = (-time + sqrt(pow(time, 2) - (4 * -1 * -distance))) / -2
             let x2 = (-time - sqrt(pow(time, 2) - (4 * -1 * -distance))) / -2
