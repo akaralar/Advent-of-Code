@@ -8,7 +8,7 @@ import RegexBuilder
 struct S2306: Solving {
     let regex = Regex { Capture { OneOrMore(.digit) } transform: { w in Int(w)! } }
 
-    func solvePart1() -> Int {
+    func solvePart1(_ input: String) -> Int {
         func countOfWaysToBeat(_ time: Int, _ distance: Int) -> Int {
             let firstOver = (1...(time/2)).first { $0 * (time-$0) > distance }!
             let ways = 2 * ((time/2) - firstOver + 1)
@@ -22,7 +22,7 @@ struct S2306: Solving {
             .reduce(1, *)
     }
 
-    func solvePart2() -> Int {
+    func solvePart2(_ input: String) -> Int {
         func calculateRoots(_ time: Double, _ distance: Double) -> (Double, Double) {
            /* Quadratic solution
              ax^2 + bx + c = 0
@@ -54,12 +54,5 @@ struct S2306: Solving {
 
         let (x1, x2) = calculateRoots(Double(timeAndDistance[0]), Double(timeAndDistance[1]))
         return Int(floor(max(x1, x2)) - ceil(min(x1, x2))) + 1
-    }
-
-    var input: String {
-        """
-        Time:        42     68     69     85
-        Distance:   284   1005   1122   1341
-        """
     }
 }

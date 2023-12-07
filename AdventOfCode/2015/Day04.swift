@@ -8,15 +8,15 @@
 import Foundation
 
 struct Day04: Solving {
-    func solvePart1() -> String {
-        return String(findFirstHash(with: "00000"))
+    func solvePart1(_ input: String) -> String {
+        return String(findFirstHash(from: input, with: "00000"))
     }
     
-    func solvePart2() -> String {
-        return String(findFirstHash(with: "000000"))
+    func solvePart2(_ input: String) -> String {
+        return String(findFirstHash(from: input, with: "000000"))
     }
 
-    func findFirstHash(with prefix: String) -> Int {
+    func findFirstHash(from input: String, with prefix: String) -> Int {
         var counter = 0
         while true {
             let hash = MD5(string: input + String(counter))
@@ -26,7 +26,4 @@ struct Day04: Solving {
 
         return counter
     }
-
-
-    var input: String { "bgvyzdsv" }
 }

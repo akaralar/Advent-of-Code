@@ -96,12 +96,11 @@ class Day11: Solving {
     func isPasswordValid(_ password: String, rules: [any Rule]) -> Bool {
         return rules.allSatisfy { $0.isValid(input: password) }
     }
-    func solvePart1() -> String {
+    func solvePart1(_ input: String) -> String {
         return nextValidPassword(input)
     }
 
-    func solvePart2() -> String {
-        return nextValidPassword(solvePart1())
+    func solvePart2(_ input: String) -> String {
+        return nextValidPassword(solvePart1(input))
     }
-    var input: String { "vzbxkghb" }
 }

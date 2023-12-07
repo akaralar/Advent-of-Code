@@ -63,7 +63,7 @@ class Day15: Solving {
     }
         .anchorsMatchLineEndings()
 
-    func solvePart1() -> String {
+    func solvePart1(_ input: String) -> String {
         let ingredients = input.lines(matching: regex)
         let totaling100: [[Int]] = cartesianProduct(
             values: Array(1...100),
@@ -80,7 +80,7 @@ class Day15: Solving {
         return "\(maxScore)"
     }
 
-    func solvePart2() -> String {
+    func solvePart2(_ input: String) -> String {
         let ingredients = input.lines(matching: regex)
         let totaling100: [[Int]] = cartesianProduct(
             values: Array(1...100),
@@ -142,14 +142,5 @@ class Day15: Solving {
         }
 
         return maxScore
-    }
-    
-    var input: String {
-        """
-        Sprinkles: capacity 2, durability 0, flavor -2, texture 0, calories 3
-        Butterscotch: capacity 0, durability 5, flavor -3, texture 0, calories 3
-        Chocolate: capacity 0, durability 0, flavor 5, texture -1, calories 8
-        Candy: capacity 0, durability -1, flavor 0, texture 5, calories 8
-        """
-    }
+    }    
 }

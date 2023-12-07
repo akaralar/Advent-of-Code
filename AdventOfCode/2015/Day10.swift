@@ -43,13 +43,11 @@ class Day10: Solving {
         return result
     }
 
-    func solvePart1() -> String {
-
+    func solvePart1(_ input: String) -> String {
         return String(solve(input: input, iterations: 40).count)
     }
 
-    func solvePart2() -> String {
+    func solvePart2(_ input: String) -> String {
         return String(solve(input: input, iterations: 50).count)
     }
-    var input: String { "3113322113" }
 }

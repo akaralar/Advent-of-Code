@@ -7,7 +7,7 @@
 
 import Foundation
 class Day17: Solving {
-    func solvePart1() -> String {
+    func solvePart1(_ input: String) -> String {
         let buckets = input.lines.map { Int($0)! }
         let combinations = (0..<buckets.count)
             .flatMap { buckets.combinations(ofCount: $0) }
@@ -16,7 +16,7 @@ class Day17: Solving {
         return String(combinations.count)
     }
 
-    func solvePart2() -> String {
+    func solvePart2(_ input: String) -> String {
         let buckets = input.lines.map { Int($0)! }
         let combinations = (0..<buckets.count)
             .flatMap { buckets.combinations(ofCount: $0) }
@@ -24,30 +24,5 @@ class Day17: Solving {
 
         let minimumContainers = combinations.map { $0.count }.min()
         return String(combinations.filter { $0.count == minimumContainers }.count)
-    }
-
-    var input: String {
-        """
-        50
-        44
-        11
-        49
-        42
-        46
-        18
-        32
-        26
-        40
-        21
-        7
-        18
-        43
-        10
-        47
-        36
-        24
-        22
-        40
-        """
     }
 }

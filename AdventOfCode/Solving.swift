@@ -10,7 +10,7 @@ import Foundation
 protocol Solving {
     associatedtype Input
     associatedtype Output
-    var input: Input { get }
-    func solvePart1() -> Output
-    func solvePart2() -> Output
+
+    func solvePart1(_ input: Input) -> Output
+    func solvePart2(_ input: Input) -> Output
 }

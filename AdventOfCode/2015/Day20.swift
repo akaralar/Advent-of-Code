@@ -68,7 +68,7 @@ extension Int {
 }
 
 class Day20: Solving {
-    func runSolution1() -> Int? {
+    func runSolution1(_ input: String) -> Int? {
         let target = Int(input)! / 10
         for i in 1...Int.max {
             let presents = i.divisors().reduce(0, +)
@@ -82,7 +82,7 @@ class Day20: Solving {
         return nil
     }
 
-    func runSolution2() -> Int? {
+    func runSolution2(_ input: String) -> Int? {
         let target = Int(input)! / 10
 
         var notFound = true
@@ -107,11 +107,11 @@ class Day20: Solving {
         }
     }
 
-    func solvePart1() -> String {
-        return String(runSolution1()!)
+    func solvePart1(_ input: String) -> String {
+        return String(runSolution1(input)!)
     }
 
-    func solvePart2() -> String {
+    func solvePart2(_ input: String) -> String {
         let target = Int(input)!
 
         for i in 1...Int.max {
@@ -128,5 +128,4 @@ class Day20: Solving {
 
         return ""
     }
-    var input: String { "29000000" }
 }
