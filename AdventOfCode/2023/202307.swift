@@ -24,46 +24,36 @@ struct S2307: Solving {
 
         let sortedHands = bidsByHands
             .keys
-            .sorted { isStronger(lhs: $0, rhs: $1, cardStrengthMap: cardStrengthMap, joker: joker) }
+            .sorted { isHigher(l: $0, r: $1, rank: cardStrengthMap, joker: joker) }
 
         return zip(1...sortedHands.count, sortedHands.reversed())
             .reduce(0) { $0 + ($1.0 * bidsByHands[$1.1]!) }
 
     }
 
-    func isStronger(
-        lhs: Substring,
-        rhs: Substring,
-        cardStrengthMap: [Character: Int],
-        joker: Character? = nil
-    ) -> Bool {
-        let l = cardCounts(of: lhs, with: joker)
-        let r = cardCounts(of: rhs, with: joker)
+    func isHigher(l: Substring, r: Substring, rank: [Character: Int], joker: Character?) -> Bool {
+        let left = cardCounts(of: l, with: joker)
+        let right = cardCounts(of: r, with: joker)
 
-        switch (l.count == r.count, l[0] == r[0]) {
+        switch (left.count == right.count, left[0] == right[0]) {
         case (true, true):
-            for (leftCard, rightCard) in zip(lhs, rhs) {
+            for (leftCard, rightCard) in zip(l, r) {
                 if leftCard == rightCard { continue }
-                return cardStrengthMap[leftCard]! < cardStrengthMap[rightCard]!
+                return rank[leftCard]! < rank[rightCard]!
             }
-        case (true, _): return l[0] > r[0]
-        case (_, _): return l.count < r.count
+        case (true, _): return left[0] > right[0]
+        case (_, _): return left.count < right.count
         }
         return false
     }
 
     func cardCounts(of hand: Substring, with joker: Character?) -> [Int] {
-        var cardsByCount = hand.reduce(into: [:]) { $0[$1, default: 0] += 1 }
-
-        if let j = joker, let jCount = cardsByCount[j], jCount < hand.count {
-            let maxCard = cardsByCount
-                .filter { $0.key != j }
-                .max { $0.value > $1.value }!
-                .key
-            cardsByCount[j] = 0
-            cardsByCount[maxCard]! += jCount
+        let cardsByCount = hand.reduce(into: [:]) { $0[$1, default: 0] += 1 }
+        var countsArray = cardsByCount.filter { $0.key != joker }.values.sorted(by: >)
+        if let j = joker, let jCount = cardsByCount[j] {
+            if jCount == hand.count { return [jCount] }
+            countsArray[0] = countsArray.first! + jCount
         }
-
-        return cardsByCount.values.sorted(by: >)
+        return countsArray
     }
 }
