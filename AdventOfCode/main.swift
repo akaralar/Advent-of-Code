@@ -7,16 +7,20 @@
 
 import Foundation
 
-let solution = S2306()
+let solution = S2307()
+
+let testInput = """
+"""
+let input = """
+"""
 
 let clock = ContinuousClock()
-var resultPart1: String = ""
 let timePart1 = clock.measure {
-    print("Part 1 answer: \(solution.solvePart1())")
+    print("Part 1 answer: \(solution.solvePart1(input))")
 }
 
 let timePart2 = clock.measure {
-    print("Part 2 answer: \(solution.solvePart2())")
+    print("Part 2 answer: \(solution.solvePart2(input))")
 }
 
 print("Part 1 time: \(format(time: timePart1))")

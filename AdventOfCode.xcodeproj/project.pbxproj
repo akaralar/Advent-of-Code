@@ -22,6 +22,7 @@
 		57AC47882A79D73C003A5B5A /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AC47872A79D73C003A5B5A /* TestHelpers.swift */; };
 		57AC478A2A79E200003A5B5A /* Day02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AC47892A79E200003A5B5A /* Day02.swift */; };
 		57AC478C2A79F2F8003A5B5A /* Day03.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AC478B2A79F2F8003A5B5A /* Day03.swift */; };
+		57C676BB2B21BECB00D6F322 /* 202307.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C676BA2B21BECB00D6F322 /* 202307.swift */; };
 		57D00ABB2A7D8B2D008809F9 /* Day04.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D00ABA2A7D8B2D008809F9 /* Day04.swift */; };
 		57D00ABD2A7D935A008809F9 /* Day05.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D00ABC2A7D935A008809F9 /* Day05.swift */; };
 		57D00AC02A7D94CE008809F9 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 57D00ABF2A7D94CE008809F9 /* Algorithms */; };
@@ -72,6 +73,7 @@
 		57AC47872A79D73C003A5B5A /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		57AC47892A79E200003A5B5A /* Day02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day02.swift; sourceTree = "<group>"; };
 		57AC478B2A79F2F8003A5B5A /* Day03.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day03.swift; sourceTree = "<group>"; };
+		57C676BA2B21BECB00D6F322 /* 202307.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202307.swift; sourceTree = "<group>"; };
 		57D00ABA2A7D8B2D008809F9 /* Day04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day04.swift; sourceTree = "<group>"; };
 		57D00ABC2A7D935A008809F9 /* Day05.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day05.swift; sourceTree = "<group>"; };
 		57D00AC12A7F3167008809F9 /* Day06.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day06.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				57EEFCE32B1DD05A0052F051 /* 202304.swift */,
 				57EEFCEC2B1F2BCD0052F051 /* 202305.swift */,
 				570025E62B20CA010092D89B /* 202306.swift */,
+				57C676BA2B21BECB00D6F322 /* 202307.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			mainGroup = 57AC47652A79CDA7003A5B5A;
 			packageReferences = (
 				57D00ABE2A7D94CE008809F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				57C676BC2B21C20E00D6F322 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 57AC476F2A79CDA7003A5B5A /* Products */;
 			projectDirPath = "";
@@ -310,6 +314,7 @@
 				57D00AC82A816BEB008809F9 /* Day08.swift in Sources */,
 				576005ED2A9156C300A5AC09 /* Day19.swift in Sources */,
 				57FD54B22A857A7500A3336A /* Day12.swift in Sources */,
+				57C676BB2B21BECB00D6F322 /* 202307.swift in Sources */,
 				576602932B19E0DB006253D9 /* Solving.swift in Sources */,
 				576005EB2A912D7E00A5AC09 /* Day18.swift in Sources */,
 				57D00AC62A7F4BE1008809F9 /* Day07.swift in Sources */,
@@ -477,6 +482,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4ZYHKZZ358;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaralar.AdventOfCodeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -492,6 +498,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4ZYHKZZ358;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaralar.AdventOfCodeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -533,6 +540,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		57C676BC2B21C20E00D6F322 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
 		57D00ABE2A7D94CE008809F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
