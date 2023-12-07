@@ -4,11 +4,6 @@
 
 import Foundation
 
-extension Comparable {
-    static func compare(lhs: Self, rhs: Self) -> ComparisonResult {
-        lhs == rhs ? .orderedSame : lhs < rhs ? .orderedAscending : .orderedDescending
-    }
-}
 struct S2307: Solving {
     func solvePart1(_ input: String) -> Int {
         calculateTotalWinnings(input, cardOrder: "AKQJT98765432", joker: nil)
@@ -54,7 +49,6 @@ struct S2307: Solving {
         case (true, _): return l.max()! > r.max()!
         case (_, _): return l.count < r.count
         }
-
         return false
     }
 
