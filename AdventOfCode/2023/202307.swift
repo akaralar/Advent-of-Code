@@ -42,9 +42,9 @@ struct S2307: Solving {
 
         switch (l.count == r.count, l[0] == r[0]) {
         case (true, true):
-            for (l, r) in zip(lhs, rhs) {
-                if l == r { continue }
-                return cardStrengthMap[l]! < cardStrengthMap[r]!
+            for (leftCard, rightCard) in zip(lhs, rhs) {
+                if leftCard == rightCard { continue }
+                return cardStrengthMap[leftCard]! < cardStrengthMap[rightCard]!
             }
         case (true, _): return l[0] > r[0]
         case (_, _): return l.count < r.count
