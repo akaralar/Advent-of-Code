@@ -40,13 +40,13 @@ struct S2307: Solving {
         let l = cardCounts(of: lhs, with: joker)
         let r = cardCounts(of: rhs, with: joker)
 
-        switch (l.count == r.count, l.max() == r.max()) {
+        switch (l.count == r.count, l[0] == r[0]) {
         case (true, true):
             for (l, r) in zip(lhs, rhs) {
                 if l == r { continue }
                 return cardStrengthMap[l]! < cardStrengthMap[r]!
             }
-        case (true, _): return l.max()! > r.max()!
+        case (true, _): return l[0] > r[0]
         case (_, _): return l.count < r.count
         }
         return false
