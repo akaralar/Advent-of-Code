@@ -19,10 +19,10 @@ struct S2308: Solving {
         return stepsForEach.dropFirst().reduce(stepsForEach[0]) { lcm($0, $1) }
     }
 
-    func instructionsAndMap(_ input: String) -> ([Character], [Substring: [Character: Substring]]) {
+    func instructionsAndMap(_ input: String) -> (Substring, [Substring: [Character: Substring]]) {
         let lines = input.lines
         return (
-            Array(lines[0]),
+            lines[0],
             lines.compactMap { $0.firstMatch(of: regex)?.output }
                 .reduce(into: [:]) { $0[$1.1] = ["L": $1.2, "R": $1.3] }
         )
@@ -31,18 +31,15 @@ struct S2308: Solving {
     func steps(
         start node: Substring,
         end predicate: (Substring) -> Bool,
-        instructions: [Character],
+        instructions: Substring,
         map: [Substring: [Character: Substring]]
     ) -> Int {
         var lookupResult = node
-        var index = instructions.startIndex
-        var counter = 0
-        while !predicate(lookupResult) {
-            lookupResult = map[lookupResult]![instructions[index]]!
-            index = index < instructions.endIndex - 1 ? index + 1 : instructions.startIndex
-            counter += 1
+        for (idx, leftOrRight) in instructions.cycled().enumerated() {
+            lookupResult = map[lookupResult]![leftOrRight]!
+            if predicate(lookupResult) { return idx + 1 }
         }
 
-        return counter
+        return -1
     }
 }
