@@ -35,11 +35,10 @@ struct S2308: Solving {
         map: [Substring: [Character: Substring]]
     ) -> Int {
         var lookupResult = node
-        for (idx, leftOrRight) in instructions.cycled().enumerated() {
+        let (idx, _) = instructions.cycled().enumerated().first { (offset, leftOrRight) in
             lookupResult = map[lookupResult]![leftOrRight]!
-            if predicate(lookupResult) { return idx + 1 }
-        }
-
-        return -1
+            return predicate(lookupResult)
+        }!
+        return idx + 1
     }
 }
