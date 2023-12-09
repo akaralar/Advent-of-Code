@@ -7,42 +7,19 @@
 
 import Foundation
 
-let testInput1 = """
-RL
-
-AAA = (BBB, CCC)
-BBB = (DDD, EEE)
-CCC = (ZZZ, GGG)
-DDD = (DDD, DDD)
-EEE = (EEE, EEE)
-GGG = (GGG, GGG)
-ZZZ = (ZZZ, ZZZ)
-"""
-
-let testInput2 = """
-LLR
-
-AAA = (BBB, BBB)
-BBB = (AAA, ZZZ)
-ZZZ = (ZZZ, ZZZ)
-"""
-
 let input = """
 """
 
-let testInput3 = """
-LR
-
-11A = (11B, XXX)
-11B = (XXX, 11Z)
-11Z = (11B, XXX)
+let testInput1 = """
+0 3 6 9 12 15
+1 3 6 10 15 21
+10 13 16 21 30 45
 22A = (22B, XXX)
 22B = (22C, 22C)
 22C = (22Z, 22Z)
-22Z = (22B, 22B)
-XXX = (XXX, XXX)
 """
-let solution = S2308()
+
+let solution = S2309()
 
 let clock = ContinuousClock()
 let timePart1 = clock.measure {
