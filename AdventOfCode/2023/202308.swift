@@ -13,10 +13,10 @@ struct S2308: Solving {
 
     func solvePart2(_ input: String) -> Int {
         let (instructions, map) = instructionsAndMap(input)
-        let stepsForEach = map.keys
+        return map.keys
             .filter { $0.last == "A" }
             .map { steps(start: $0, end: { $0.last == "Z" }, instructions: instructions, map: map) }
-        return stepsForEach.dropFirst().reduce(stepsForEach[0]) { lcm($0, $1) }
+            .leastCommonMultiple()
     }
 
     func instructionsAndMap(_ input: String) -> (Substring, [Substring: [Character: Substring]]) {
