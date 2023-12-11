@@ -125,7 +125,6 @@ struct S2310: Solving {
         fatalError()
     }
 
-
     func exitCoordinate(
         ofPipeAt coordinate: (x: Int, y: Int),
         entrance: (x: Int, y: Int),
