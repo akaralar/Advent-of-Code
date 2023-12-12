@@ -28,6 +28,7 @@
 		57C676C22B2479D300D6F322 /* 202309.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C676C12B2479D300D6F322 /* 202309.swift */; };
 		57C676C42B26574400D6F322 /* 202310.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C676C32B26574400D6F322 /* 202310.swift */; };
 		57C676C62B27501E00D6F322 /* 202311.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C676C52B27501E00D6F322 /* 202311.swift */; };
+		57C676C82B2871B400D6F322 /* 202312.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C676C72B2871B400D6F322 /* 202312.swift */; };
 		57D00ABB2A7D8B2D008809F9 /* Day04.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D00ABA2A7D8B2D008809F9 /* Day04.swift */; };
 		57D00ABD2A7D935A008809F9 /* Day05.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D00ABC2A7D935A008809F9 /* Day05.swift */; };
 		57D00AC02A7D94CE008809F9 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 57D00ABF2A7D94CE008809F9 /* Algorithms */; };
@@ -84,6 +85,7 @@
 		57C676C12B2479D300D6F322 /* 202309.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202309.swift; sourceTree = "<group>"; };
 		57C676C32B26574400D6F322 /* 202310.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202310.swift; sourceTree = "<group>"; };
 		57C676C52B27501E00D6F322 /* 202311.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202311.swift; sourceTree = "<group>"; };
+		57C676C72B2871B400D6F322 /* 202312.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202312.swift; sourceTree = "<group>"; };
 		57D00ABA2A7D8B2D008809F9 /* Day04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day04.swift; sourceTree = "<group>"; };
 		57D00ABC2A7D935A008809F9 /* Day05.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day05.swift; sourceTree = "<group>"; };
 		57D00AC12A7F3167008809F9 /* Day06.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day06.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				57C676C12B2479D300D6F322 /* 202309.swift */,
 				57C676C32B26574400D6F322 /* 202310.swift */,
 				57C676C52B27501E00D6F322 /* 202311.swift */,
+				57C676C72B2871B400D6F322 /* 202312.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57D00AC22A7F3167008809F9 /* Day06.swift in Sources */,
+				57C676C82B2871B400D6F322 /* 202312.swift in Sources */,
 				57C676C42B26574400D6F322 /* 202310.swift in Sources */,
 				570025E72B20CA010092D89B /* 202306.swift in Sources */,
 				57EEFCE42B1DD05A0052F051 /* 202304.swift in Sources */,
@@ -414,7 +418,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
