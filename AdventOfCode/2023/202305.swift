@@ -5,21 +5,6 @@
 import Foundation
 import Algorithms
 
-extension Set where Element == Range<Int> {
-    func joinedIfContinuous() -> Self {
-        if count < 2 { return self }
-        return Set(
-            self.sorted { $0.lowerBound < $1.lowerBound }
-                .reduce(into: Array<Range<Int>>()) { partial, next in
-                    if let last = partial.last, last.upperBound == next.lowerBound {
-                        partial[partial.endIndex - 1] = last.lowerBound ..< next.upperBound
-                    } else {
-                        partial.append(next)
-                    }
-                }
-        )
-    }
-}
 
 extension Range where Bound == Int {
     func mappedAndUnmapped(with mapping: [Bound]) -> (mapped: Set<Self>, unmapped: Set<Self>) {
