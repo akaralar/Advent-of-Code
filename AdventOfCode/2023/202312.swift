@@ -29,38 +29,39 @@ class S2312: Solving {
     }
 
     var cachedResults: [String: Int] = [:]
+
     func arrangements(_ record: [Character], _ counts: [Int]) -> Int {
         let encoded = String(record) + ";" + counts.compactMap(String.init).joined(separator: ",")
         if let cached = cachedResults[encoded] {
             return cached
         }
+        let result = calculateArrangements(record, counts)
+        cachedResults[encoded] = result
+        return result
+    }
 
-        let result: Int
+    func calculateArrangements(_ record: [Character], _ counts: [Int]) -> Int {
         if record.isEmpty {
-            result = counts.isEmpty ? 1 : 0
+            return counts.isEmpty ? 1 : 0
         } else if counts.isEmpty {
-            result = record.allSatisfy { $0 != "#" } ? 1 : 0
+            return record.allSatisfy { $0 != "#" } ? 1 : 0
         } else if record.filter({ $0 != "." }).count < counts.reduce(0, +)  {
-            result = 0
+            return 0
         } else if record.first == "." || record.last == "." {
-            result = arrangements(Array(record.trimming(while: { $0 == "." })), counts)
+            return arrangements(Array(record.trimming(while: { $0 == "." })), counts)
         } else if record.first == "?" {
             let asWorking = ["#"] + record[1...]
             let asDamaged = Array(record[1...])
-            result = arrangements(asWorking, counts) + arrangements(asDamaged, counts)
+            return arrangements(asWorking, counts) + arrangements(asDamaged, counts)
         } else {
             if record.prefix(upTo: counts[0]).contains(".") {
-                result = 0
+                return 0
             } else if counts[0] < record.count && record[counts[0]] == "#" {
-                result = 0
+                return 0
             } else {
                 let recordLeft = Array(record.dropFirst(counts[0]+1))
-                result = arrangements(recordLeft, Array(counts.dropFirst()))
+                return arrangements(recordLeft, Array(counts.dropFirst()))
             }
         }
-
-        cachedResults[encoded] = result
-
-        return result
     }
 }
