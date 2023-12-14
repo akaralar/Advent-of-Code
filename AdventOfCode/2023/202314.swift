@@ -14,8 +14,8 @@ class S2314: Solving {
 
     func solvePart2(_ input: String) -> Int {
         var dish: [[Character]] = input.lines.map { Array($0) }
-        let (idx, cycle) = repeatingFrequency(of: &dish)
-        let x = (1_000_000_000 - idx) % cycle
+        let (idx, freq) = repeatingFrequency(of: &dish)
+        let x = (1_000_000_000 - idx) % freq
         ["N", "W", "S", "E"].cycled(times: x).forEach { tilt(&dish, towards: $0) }
         return totalLoadOnNorthBeams(dish)
     }
