@@ -3,19 +3,20 @@
 
 
 import Foundation
+import Algorithms
 
 class S2314: Solving {
     func solvePart1(_ input: String) -> Int {
         var dish: [[Character]] = input.lines.map { Array($0) }
-        tiltNorth(&dish)
+        tilt(&dish, towards: "N")
         return totalLoadOnNorthBeams(dish)
     }
 
     func solvePart2(_ input: String) -> Int {
         var dish: [[Character]] = input.lines.map { Array($0) }
-        let (idx, cycle) = repeatingCycle(of: &dish)
+        let (idx, cycle) = repeatingFrequency(of: &dish)
         let x = (1_000_000_000 - idx) % cycle
-        tilt(&dish, cycles: x)
+        ["N", "W", "S", "E"].cycled(times: x).forEach { tilt(&dish, towards: $0) }
         return totalLoadOnNorthBeams(dish)
     }
 
@@ -24,29 +25,15 @@ class S2314: Solving {
             .reduce(0) { $0 + ((dish.count-$1.offset) * $1.element.filter { $0 == "O" }.count) }
     }
 
-    func tilt(_ dish: inout [[Character]], cycles: Int) {
-        for _ in 0..<cycles {
-            tiltNorth(&dish)
-            tiltWest(&dish)
-            tiltSouth(&dish)
-            tiltEast(&dish)
-        }
-    }
-
-    func repeatingCycle(of dish: inout [[Character]]) -> (idx: Int, cycleLength: Int) {
+    func repeatingFrequency(of dish: inout [[Character]]) -> (idx: Int, cycleLength: Int) {
         var dishes: Set<[[Character]]> = []
         var lastIndex = -1
         var cyclePeriod = 0
         for i in 1... {
-            tiltNorth(&dish)
-            tiltWest(&dish)
-            tiltSouth(&dish)
-            tiltEast(&dish)
+            ["N", "W", "S", "E"].forEach { tilt(&dish, towards: $0) }
             if !dishes.insert(dish).inserted {
                 if i - lastIndex > 1 {
-                    if cyclePeriod == i-(lastIndex+1) {
-                        return (idx: i, cycleLength: cyclePeriod)
-                    }
+                    if cyclePeriod == i-(lastIndex+1) { return (idx: i, cycleLength: cyclePeriod) }
                     cyclePeriod = i-(lastIndex+1)
                 }
                 lastIndex = i
@@ -57,71 +44,36 @@ class S2314: Solving {
         fatalError()
     }
 
-    func printDish(_ dish: [[Character]], _ message: String) {
-        print(message + "\n")
-        print(dish.map { String($0) }.joined(separator: "\n"))
-        print("------------------")
-    }
-
-    func tiltNorth(_ dish: inout [[Character]]) {
-        for x in dish[0].indices {
-            var previousRock = -1
-            for y in dish.indices {
-                if dish[y][x] == "#" {
-                    previousRock = y
-                } else if dish[y][x] == "O" {
-                    let temp = dish[previousRock + 1][x]
-                    dish[previousRock + 1][x] = dish[y][x]
-                    dish[y][x] = temp
-                    previousRock = previousRock + 1
-                }
+    func tilt(_ dish: inout [[Character]], towards direction: Character) {
+        func parameters(for direction: Character, dish d: [[Character]]) -> (
+            Range<Int>,
+            Range<Int>,
+            Int,
+            (Int, Int) -> (Int, Int),
+            (Int, Int, Int) -> (Int, Int)
+        ) {
+            switch direction {
+            case "N": return (d[0].indices, d.indices, 1, { i, j in (i, j) }, { x, y, p in (x, p)})
+            case "W": return (d.indices, d[0].indices, 1, { i, j in (j, i) }, { x, y, p in (p, y)})
+            case "S": return (d[0].indices, d.indices, -1, { i, j in (i, j) }, { x, y, p in (x, p)})
+            case "E": return (d.indices, d[0].indices, -1, { i, j in (j, i) }, { x, y, p in (p, y)})
+            default: fatalError()
             }
         }
-    }
-
-    func tiltWest(_ dish: inout [[Character]]) {
-        for y in dish.indices {
-            var previousRock = -1
-            for x in dish[0].indices {
+        let (outer, inner, diff, xy, xyp) = parameters(for: direction, dish: dish)
+        let inn = diff < 0 ? Array(inner.reversed()) : Array(inner)
+        for i in outer {
+            var previousRock = inn.first! - diff
+            for j in inn {
+                let (x, y) = xy(i, j)
                 if dish[y][x] == "#" {
-                    previousRock = x
+                    previousRock = j
                 } else if dish[y][x] == "O" {
-                    let temp = dish[y][previousRock + 1]
-                    dish[y][previousRock + 1] = dish[y][x]
-                    dish[y][x] = temp
-                    previousRock = previousRock + 1
-                }
-            }
-        }
-    }
-
-    func tiltSouth(_ dish: inout [[Character]]) {
-        for x in dish[0].indices {
-            var previousRock = dish.endIndex
-            for y in dish.indices.reversed() {
-                if dish[y][x] == "#" {
-                    previousRock = y
-                } else if dish[y][x] == "O" {
-                    let temp = dish[previousRock - 1][x]
-                    dish[previousRock - 1][x] = dish[y][x]
-                    dish[y][x] = temp
-                    previousRock = previousRock - 1
-                }
-            }
-        }
-    }
-
-    func tiltEast(_ dish: inout [[Character]]) {
-        for y in dish.indices {
-            var previousRock = dish[0].endIndex
-            for x in dish[0].indices.reversed() {
-                if dish[y][x] == "#" {
-                    previousRock = x
-                } else if dish[y][x] == "O" {
-                    let temp = dish[y][previousRock - 1]
-                    dish[y][previousRock - 1] = dish[y][x]
-                    dish[y][x] = temp
-                    previousRock = previousRock - 1
+                    let (xp, yp) = xyp(x, y, previousRock + diff)
+                    let swap = dish[yp][xp]
+                    dish[yp][xp] = dish[y][x]
+                    dish[y][x] = swap
+                    previousRock += diff
                 }
             }
         }
