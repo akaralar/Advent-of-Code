@@ -23,9 +23,7 @@ class S2315: Solving {
             }
             .reduce(0) { sum, next in
                 let (box, lenses) = next
-                let boxSum = lenses.enumerated()
-                    .map { ($0+1, $1) }
-                    .reduce(0) { boxSum, next in
+                let boxSum = zip(1..., lenses).reduce(0) { boxSum, next in
                         let (slot, (_, focalLength)) = next
                         return boxSum + (slot * focalLength)
                     }
