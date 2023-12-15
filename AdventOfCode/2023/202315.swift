@@ -16,10 +16,10 @@ class S2315: Solving {
 
     func solvePart2(_ input: String) -> Int {
         return input.split(separator: ",")
-            .map { (prefix: $0.prefix(while: { $0 != "=" && $0 != "-" }), last: $0.last!) }
+            .map { (label: $0.prefix(while: { $0 != "=" && $0 != "-" }), last: $0.last!) }
             .reduce(into: [Int: OrderedDictionary<Substring, Int>]()) { boxes, next in
-                let box = hash(next.prefix)
-                boxes[box, default: [:]][next.prefix] = Int(String(next.last))
+                let box = hash(next.label)
+                boxes[box, default: [:]][next.label] = Int(String(next.last))
             }
             .reduce(0) { sum, next in
                 let (box, lenses) = next

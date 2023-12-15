@@ -14,6 +14,10 @@
 		576005ED2A9156C300A5AC09 /* Day19.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576005EC2A9156C300A5AC09 /* Day19.swift */; };
 		576602932B19E0DB006253D9 /* Solving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576602922B19E0DB006253D9 /* Solving.swift */; };
 		576602952B19E17C006253D9 /* 202301.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576602942B19E17C006253D9 /* 202301.swift */; };
+		578482672B2C536C0089A086 /* 202315.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578482662B2C536C0089A086 /* 202315.swift */; };
+		5784826A2B2C60980089A086 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 578482692B2C60980089A086 /* Collections */; };
+		5784826C2B2C60980089A086 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 5784826B2B2C60980089A086 /* DequeModule */; };
+		5784826E2B2C60980089A086 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 5784826D2B2C60980089A086 /* OrderedCollections */; };
 		5784DA0C2AAA574100E668FA /* Day20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784DA0B2AAA574100E668FA /* Day20.swift */; };
 		5788292D2B29DF3B0044D935 /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788292C2B29DF3B0044D935 /* CollectionHelpers.swift */; };
 		5788292F2B2A18CB0044D935 /* 202313.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788292E2B2A18CB0044D935 /* 202313.swift */; };
@@ -72,6 +76,7 @@
 		576005EC2A9156C300A5AC09 /* Day19.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day19.swift; sourceTree = "<group>"; };
 		576602922B19E0DB006253D9 /* Solving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solving.swift; sourceTree = "<group>"; };
 		576602942B19E17C006253D9 /* 202301.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202301.swift; sourceTree = "<group>"; };
+		578482662B2C536C0089A086 /* 202315.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202315.swift; sourceTree = "<group>"; };
 		5784DA0B2AAA574100E668FA /* Day20.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day20.swift; sourceTree = "<group>"; };
 		5788292C2B29DF3B0044D935 /* CollectionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelpers.swift; sourceTree = "<group>"; };
 		5788292E2B2A18CB0044D935 /* 202313.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 202313.swift; sourceTree = "<group>"; };
@@ -116,7 +121,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5784826A2B2C60980089A086 /* Collections in Frameworks */,
 				57D00AC02A7D94CE008809F9 /* Algorithms in Frameworks */,
+				5784826E2B2C60980089A086 /* OrderedCollections in Frameworks */,
+				5784826C2B2C60980089A086 /* DequeModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +155,7 @@
 				57C676C72B2871B400D6F322 /* 202312.swift */,
 				5788292E2B2A18CB0044D935 /* 202313.swift */,
 				578829302B2B34DB0044D935 /* 202314.swift */,
+				578482662B2C536C0089A086 /* 202315.swift */,
 			);
 			path = 2023;
 			sourceTree = "<group>";
@@ -238,6 +247,9 @@
 			name = AdventOfCode;
 			packageProductDependencies = (
 				57D00ABF2A7D94CE008809F9 /* Algorithms */,
+				578482692B2C60980089A086 /* Collections */,
+				5784826B2B2C60980089A086 /* DequeModule */,
+				5784826D2B2C60980089A086 /* OrderedCollections */,
 			);
 			productName = AdventOfCode;
 			productReference = 57AC476E2A79CDA7003A5B5A /* AdventOfCode */;
@@ -289,7 +301,7 @@
 			mainGroup = 57AC47652A79CDA7003A5B5A;
 			packageReferences = (
 				57D00ABE2A7D94CE008809F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				57C676BC2B21C20E00D6F322 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				578482682B2C60980089A086 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 57AC476F2A79CDA7003A5B5A /* Products */;
 			projectDirPath = "";
@@ -336,6 +348,7 @@
 				57D00ACC2A81E9CF008809F9 /* Day10.swift in Sources */,
 				5788292F2B2A18CB0044D935 /* 202313.swift in Sources */,
 				576005E92A91080300A5AC09 /* Day17.swift in Sources */,
+				578482672B2C536C0089A086 /* 202315.swift in Sources */,
 				57C676C02B236BF300D6F322 /* Math.swift in Sources */,
 				57AC478C2A79F2F8003A5B5A /* Day03.swift in Sources */,
 				57DA2AA32A8E6FA5008A10E6 /* Day13.swift in Sources */,
@@ -577,7 +590,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		57C676BC2B21C20E00D6F322 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		578482682B2C60980089A086 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -596,6 +609,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		578482692B2C60980089A086 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 578482682B2C60980089A086 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		5784826B2B2C60980089A086 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 578482682B2C60980089A086 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		5784826D2B2C60980089A086 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 578482682B2C60980089A086 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
 		57D00ABF2A7D94CE008809F9 /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57D00ABE2A7D94CE008809F9 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
