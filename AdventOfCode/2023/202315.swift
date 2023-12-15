@@ -18,7 +18,7 @@ class S2315: Solving {
         return input.split(separator: ",")
             .map { (label: $0.prefix(while: { $0 != "=" && $0 != "-" }), last: $0.last!) }
             .reduce(into: [Int: OrderedDictionary<Substring, Int>]()) { boxes, next in
-                boxes[hash(next.label), default: [:]][next.label] = Int(String(next.last))
+                boxes[hash(next.label), default: [:]][next.label] = next.last.wholeNumberValue
             }
             .mapValues { d -> Int in zip(1..., d.elements.values).reduce(0) { $0 + ($1.0 * $1.1) } }
             .reduce(0) { (sum: Int, next: (Int, Int)) -> Int in sum + ((next.0 + 1) * next.1) }
