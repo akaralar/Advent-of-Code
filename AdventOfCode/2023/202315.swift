@@ -24,9 +24,9 @@ class S2315: Solving {
             .reduce(0) { sum, next in
                 let (box, lenses) = next
                 let boxSum = zip(1..., lenses).reduce(0) { boxSum, next in
-                        let (slot, (_, focalLength)) = next
-                        return boxSum + (slot * focalLength)
-                    }
+                    let (slot, (_, focalLength)) = next
+                    return boxSum + (slot * focalLength)
+                }
                 return sum + ((box + 1) * boxSum)
             }
     }
