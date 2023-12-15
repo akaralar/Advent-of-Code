@@ -20,6 +20,7 @@ class S2315: Solving {
             .reduce(into: [Int: OrderedDictionary<Substring, Int>]()) { boxes, next in
                 boxes[hash(next.label), default: [:]][next.label] = Int(String(next.last))
             }
-            .reduce(0) { $0 + (($1.0 + 1) * zip(1..., $1.1.values).reduce(0) { $0 + ($1.0 * $1.1)})}
+            .mapValues { d -> Int in zip(1..., d.elements.values).reduce(0) { $0 + ($1.0 * $1.1) } }
+            .reduce(0) { (sum: Int, next: (Int, Int)) -> Int in sum + ((next.0 + 1) * next.1) }
     }
 }
