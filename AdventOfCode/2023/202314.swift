@@ -53,10 +53,10 @@ class S2314: Solving {
             (Int, Int, Int) -> (Int, Int)
         ) {
             switch direction {
-            case "N": return (d[0].indices, d.indices, 1, { i, j in (i, j) }, { x, y, p in (x, p)})
-            case "W": return (d.indices, d[0].indices, 1, { i, j in (j, i) }, { x, y, p in (p, y)})
-            case "S": return (d[0].indices, d.indices, -1, { i, j in (i, j) }, { x, y, p in (x, p)})
-            case "E": return (d.indices, d[0].indices, -1, { i, j in (j, i) }, { x, y, p in (p, y)})
+            case "N": (d[0].indices, d.indices, 1, { i, j in (i, j) }, { x, y, p in (x, p)})
+            case "W": (d.indices, d[0].indices, 1, { i, j in (j, i) }, { x, y, p in (p, y)})
+            case "S": (d[0].indices, d.indices, -1, { i, j in (i, j) }, { x, y, p in (x, p)})
+            case "E": (d.indices, d[0].indices, -1, { i, j in (j, i) }, { x, y, p in (p, y)})
             default: fatalError()
             }
         }
