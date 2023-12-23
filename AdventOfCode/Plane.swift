@@ -141,8 +141,12 @@ struct Grid<Element>: RandomAccessCollection {
 
     func index(before p: Point) -> Point {
         if p.x - 1 >= 0 { Point(x: p.x - 1, y: p.y) }
-        else if p.y - 1 < 0 { Point(x: xEndIndex - 1, y: p.y - 1) }
+        else if p.y - 1 >= 0 { Point(x: xEndIndex - 1, y: p.y - 1) }
         else { startIndex }
+    }
+
+    func contains(point p: Point) -> Bool {
+        (0..<xEndIndex).contains(p.x) && (0..<yEndIndex).contains(p.y)
     }
 }
 

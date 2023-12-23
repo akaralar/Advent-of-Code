@@ -37,7 +37,7 @@ class S2316: Solving {
         while !toVisit.isEmpty {
             let ref = toVisit.removeFirst()
             let (p, dir) = (ref.point, ref.direction)
-            guard grid.indices.contains(p), visited.insert(ref).inserted else { continue }
+            guard grid.contains(point: p), visited.insert(ref).inserted else { continue }
 
             dir.directions(after: grid[p])
                 .forEach { toVisit.insert(Reflection(point: p.moving(in: $0), direction: $0)) }
@@ -48,7 +48,6 @@ class S2316: Solving {
 
     func solvePart2(_ input: String) -> Int {
         let grid = Grid(from: input)
-
         return Direction.allCases
             .flatMap { d in grid.edgeIndices(for: d).map { (d, $0) } }
             .map { energizedTiles(in: grid, entry: $0.1, direction: $0.0).count }
