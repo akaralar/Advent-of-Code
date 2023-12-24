@@ -65,7 +65,6 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
 
     // Perform bottom up node swim, O(log(n))
     mutating private func swim(_ index: Int) {
-
         // Grab the index of the next parent node WRT to given index
         var parent = (index - 1) / 2
         var i = index

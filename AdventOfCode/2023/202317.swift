@@ -20,7 +20,8 @@ class S2317: Solving {
         in trail: [Point: Point],
         start: Point,
         goal: Point,
-        maxNodes: Int = .max
+        maxNodes: Int = .max,
+        includeStart: Bool = false
     ) -> [Point] {
         var current = goal
         var path: [Point] = []
@@ -30,6 +31,8 @@ class S2317: Solving {
             path.append(current)
             current = trail[current]!
         }
+
+        if includeStart { path.append(start) }
 
         return path
     }
