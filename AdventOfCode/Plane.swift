@@ -30,6 +30,10 @@ struct Point: Equatable, Hashable {
         p.move(in: direction, by: distance)
         return p
     }
+
+    func manhattanDistance(to point: Point) -> Int {
+        return abs(x - point.x) + abs(y - point.y)
+    }
 }
 
 extension Point: Comparable {
@@ -39,6 +43,11 @@ extension Point: Comparable {
         else { rhs.x < rhs.x }
     }
 }
+
+extension Point: CustomStringConvertible {
+    var description: String { "\(x), \(y)" }
+}
+
 /// Origin is top left
 enum Direction: CaseIterable {
     case up
@@ -131,7 +140,7 @@ struct Grid<Element>: RandomAccessCollection {
     }
 
     var startIndex: Point { .origin }
-    var endIndex: Point { Point(x: elements[0].endIndex, y: elements.endIndex)}
+    var endIndex: Point { Point(x: elements[0].endIndex, y: elements.endIndex - 1)}
 
     func index(after p: Point) -> Point {
         if p.x + 1 < xEndIndex { Point(x: p.x + 1, y: p.y) }
@@ -144,10 +153,6 @@ struct Grid<Element>: RandomAccessCollection {
         else if p.y - 1 >= 0 { Point(x: xEndIndex - 1, y: p.y - 1) }
         else { startIndex }
     }
-
-    func contains(point p: Point) -> Bool {
-        (0..<xEndIndex).contains(p.x) && (0..<yEndIndex).contains(p.y)
-    }
 }
 
 extension Grid {
@@ -158,5 +163,42 @@ extension Grid {
         case .left: (0..<yEndIndex).map { Point(x: 0, y: $0) }
         case .right: (0..<yEndIndex).map { Point(x: xEndIndex-1, y: $0) }
         }
+    }
+
+    func contains(point p: Point) -> Bool {
+        (0..<xEndIndex).contains(p.x) && (0..<yEndIndex).contains(p.y)
+    }
+
+    func neighbors(of p: Point) -> Set<Point> {
+        Direction.allCases
+            .lazy
+            .map(\.unitVector)
+            .map(p.applying(_:))
+            .filter(contains(point:))
+            .reduce(into: Set<Point>()) { $0.insert($1) }
+    }
+}
+
+struct GridIndices: Collection, BidirectionalCollection, RandomAccessCollection {
+    let xRange: Range<Int>
+    let yRange: Range<Int>
+
+    var startIndex: Point { .origin }
+    var endIndex: Point { Point(x: xRange.upperBound, y: yRange.upperBound) }
+
+    subscript(position: Point) -> Point {
+        return position
+    }
+
+    func index(after p: Point) -> Point {
+        if p.x + 1 < xRange.upperBound { Point(x: p.x + 1, y: p.y) }
+        else if p.y + 1 < yRange.upperBound { Point(x: 0, y: p.y + 1) }
+        else { endIndex }
+    }
+
+    func index(before p: Point) -> Point {
+        if p.x - 1 >= 0 { Point(x: p.x - 1, y: p.y) }
+        else if p.y - 1 >= 0 { Point(x: xRange.upperBound - 1, y: p.y - 1) }
+        else { startIndex }
     }
 }
