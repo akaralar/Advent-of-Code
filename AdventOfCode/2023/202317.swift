@@ -31,10 +31,6 @@ class S2317: Solving {
             current = trail[current]!
         }
 
-        if maxNodes == Int.max {
-            path.append(start)
-        }
-
         return path
     }
 
