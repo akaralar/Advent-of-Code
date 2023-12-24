@@ -13,21 +13,6 @@ class S2317: Solving {
         let (cameFrom, _) = aStar(grid, start: .origin, end: goal)
         let path = reconstructPath(in: cameFrom, start: .origin, goal: goal)
 
-        var rows = [[String]]()
-        for (point, heatLoss) in zip(grid.indices, grid) {
-
-            if point.x == 0 {
-                rows.append([String(heatLoss)])
-            } else {
-                rows[rows.endIndex-1].append(String(heatLoss))
-            }
-
-            if path.contains(point) {
-                rows[rows.endIndex-1].removeLast()
-                rows[rows.endIndex-1].append("*")
-            }
-        }
-
         return path.map { grid[$0] }.reduce(0, +)
     }
 
