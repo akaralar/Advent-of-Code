@@ -53,8 +53,6 @@ class S2317: Solving {
             var neighbors = grid.neighbors(of: current)
 
             let last4 = reconstructPath(in: cameFrom, start: start, goal: current, maxNodes: 4)
-            print(current)
-
             if last4.count >= 4 && last4[1...].allSatisfy({ $0.x == last4[0].x }) {
                 neighbors = neighbors.filter { $0.x != last4[0].x }
             }
@@ -80,34 +78,6 @@ class S2317: Solving {
         }
 
         return (cameFrom, costSoFar)
-    }
-
-    func findPath(_ grid: Grid<Int>) {
-        let goal = grid.index(before: grid.endIndex)
-
-        var frontier = Array<Point>()
-        frontier.append(.origin)
-        var cameFrom = Dictionary<Point, Point>()
-
-        while !frontier.isEmpty {
-            let current = frontier.removeFirst()
-
-            if current == goal { break }
-
-            for next in grid.neighbors(of: current) where cameFrom[next] == nil {
-                frontier.append(next)
-                cameFrom[next] = current
-            }
-        }
-
-        var current = grid.index(before: grid.endIndex)
-        var path: [Point] = []
-        while current != .origin {
-            path.append(current)
-            current = cameFrom[current]!
-        }
-        path.append(.origin)
-        path.reverse()
     }
 
     func solvePart2(_ input: String) -> Int {
