@@ -70,7 +70,6 @@ class S2317: Solving {
 
                 if costSoFar[next] == nil || newCost < costSoFar[next]! {
                     costSoFar[next] = newCost
-
                     frontier.add(next, priority: newCost + heuristic(end, next))
                     cameFrom[next] = current
                 }

@@ -61,8 +61,6 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
     // This method assumes i & j are valid indices
     private func isLess(_ index1: Int, _ index2: Int) -> Bool {
         priorities[index1] <= priorities[index2]
-//        return elementPredicate(heap[index1], heap[index2])
-//        return heap[index1] <= heap[index2]
     }
 
     // Perform bottom up node swim, O(log(n))
@@ -121,14 +119,12 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
         map[value1]?.insert(index2)
         map[value2]?.insert(index1)
 
-        // Exchange the priority of two nodes internally within priorities
+        // Exchange the priority of two nodes internally within the priorities array
         let p1 = priorities[index1]
         let p2 = priorities[index2]
 
         priorities[index2] = p1
         priorities[index1] = p2
-
-//        mapSwap((value1, value2), (index1, index2))
     }
 
     mutating func remove(value: Element) -> Bool {
@@ -152,7 +148,11 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
         // Obliterate the value
         heap.removeLast()
         priorities.removeLast()
-        mapRemove(removed, lastIndex)
+        // Removes the index at a given value, O(log(n))
+        if var set = map[removed] {
+            set.remove(index)
+            map[removed] = set.isEmpty ? nil : set
+        }
 
         // Removed last element
         if index == lastIndex { return removed }
@@ -190,22 +190,7 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
         return isMinHeap(left) && isMinHeap(right)
     }
 
-    // Removes the index at a given value, O(log(n))
-    mutating private func mapRemove(_ value: Element, _ index: Int) {
-        guard var set = map[value] else { return }
-        set.remove(index)
-        map[value] = set.isEmpty ? nil : set
-    }
-
-//
-//    mutating func mapSwap(_ values: (Element, Element), _ indices: (Int, Int)) {
-//        map[values.0]?.remove(indices.0)
-//        map[values.1]?.remove(indices.1)
-//
-//        map[values.0]?.insert(indices.1)
-//        map[values.1]?.insert(indices.0)
-//    }
-
+    // MARK: - Collection Conformance
     subscript(index: Int) -> Element {
         get { heap[index] }
         set { heap[index] = newValue }
