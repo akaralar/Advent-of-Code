@@ -4,15 +4,6 @@
 
 import Foundation
 
-struct Node: Equatable, Hashable, Comparable {
-    static func < (lhs: Node, rhs: Node) -> Bool {
-        lhs.cost < rhs.cost
-    }
-    
-    let point: Point
-    let cost: Int
-}
-
 class S2317: Solving {
 
     func solvePart1(_ input: String) -> Int {
@@ -36,7 +27,7 @@ class S2317: Solving {
                 rows[rows.endIndex-1].append("*")
             }
         }
-        
+
         return path.map { grid[$0] }.reduce(0, +)
     }
 
