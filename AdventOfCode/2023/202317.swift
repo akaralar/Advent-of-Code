@@ -26,7 +26,7 @@ class S2317: Solving {
         var path: [Point] = []
         if trail[goal] == nil { return [] }
 
-        while current != start && path.count <= maxNodes {
+        while current != start && path.count < maxNodes {
             path.append(current)
             current = trail[current]!
         }
@@ -56,15 +56,15 @@ class S2317: Solving {
 
             var neighbors = grid.neighbors(of: current)
 
-            let last3 = reconstructPath(in: cameFrom, start: start, goal: current, maxNodes: 3)
+            let last4 = reconstructPath(in: cameFrom, start: start, goal: current, maxNodes: 4)
             print(current)
 
-            if last3.count >= 4 && last3[1...].allSatisfy({ $0.x == last3[0].x }) {
-                neighbors = neighbors.filter { $0.x != last3[0].x }
+            if last4.count >= 4 && last4[1...].allSatisfy({ $0.x == last4[0].x }) {
+                neighbors = neighbors.filter { $0.x != last4[0].x }
             }
 
-            if last3.count >= 4 && last3[1...].allSatisfy({ $0.y == last3[0].y}) {
-                neighbors = neighbors.filter { $0.y != last3[0].y }
+            if last4.count >= 4 && last4[1...].allSatisfy({ $0.y == last4[0].y}) {
+                neighbors = neighbors.filter { $0.y != last4[0].y }
             }
 
             if let previous = cameFrom[current], neighbors.contains(previous) {
