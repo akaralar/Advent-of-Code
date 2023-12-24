@@ -10,10 +10,8 @@ class S2317: Solving {
         let grid = Grid(from: input, mapping: { $0.wholeNumberValue! })
 
         let goal = grid.index(before: grid.endIndex)
-        let (cameFrom, _) = aStar(grid, start: .origin, end: goal)
-        let path = reconstructPath(in: cameFrom, start: .origin, goal: goal)
-
-        return path.map { grid[$0] }.reduce(0, +)
+        let (cameFrom, costSoFar) = aStar(grid, start: .origin, end: goal)
+        return costSoFar[goal]!
     }
 
     func reconstructPath(
