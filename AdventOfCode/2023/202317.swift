@@ -3,15 +3,27 @@
 
 
 import Foundation
-
 class S2317: Solving {
 
     func solvePart1(_ input: String) -> Int {
-        let grid = Grid(from: input, mapping: { $0.wholeNumberValue! })
+        let grid = Grid(input.lines, mapping: { $0.wholeNumberValue! })
 
         let goal = grid.index(before: grid.endIndex)
-        let (cameFrom, costSoFar) = aStar(grid, start: .origin, end: goal)
-        return costSoFar[goal]!
+        let (trail, costSoFar) = aStar(grid, start: .origin, goal: goal)
+        let path = reconstructPath(in: trail, start: .origin, goal: goal)
+        paint(grid: grid, path: path)
+        return costSoFar[goal]!.1
+    }
+
+    func paint(grid: Grid<Int>, path: [Point]) {
+
+        var grid: Grid<String> = Grid(grid.rows(), mapping: { _ in "." })
+        for point in path {
+            grid[point] = "#"
+        }
+
+        print("\n-----GRID-----")
+        print(grid.rows().map { $0.joined() }.joined(separator: "\n"))
     }
 
     func reconstructPath(
@@ -21,63 +33,77 @@ class S2317: Solving {
         maxNodes: Int = .max,
         includeStart: Bool = false
     ) -> [Point] {
-        var current = goal
-        var path: [Point] = []
-        if trail[goal] == nil { return [] }
+        var path: [Point] = [goal]
+        guard var current = trail[goal] else { return path }
 
         while current != start && path.count < maxNodes {
             path.append(current)
             current = trail[current]!
         }
 
-        if includeStart { path.append(start) }
+        if includeStart || path.count < maxNodes { path.append(start) }
 
         return path
     }
 
     func heuristic(_ goal: Point, _ next: Point) -> Int {
-        0
+        goal.manhattanDistance(to: next)
+//        0
     }
 
-    func aStar(_ grid: Grid<Int>, start: Point, end: Point) -> ([Point: Point], [Point: Int]) {
-        var frontier = PriorityQueue<Point, Int>(values: [], priorities: [])
-        frontier.add(start, priority: grid[start])
+    func aStar(_ grid: Grid<Int>, start: Point, goal: Point) -> ([Point: Point], [Point: (Int, Int)]) {
+        var frontier = PriorityQueue<Point, Double>(values: [], priorities: [])
+        frontier.add(start, priority: Double(grid[start]))
 
-        var cameFrom: [Point: Point] = [:]
-        var costSoFar: [Point: Int] = [:]
+        var trail: [Point: Point] = [:]
+        var costSoFar: [Point: (steps: Int, total: Int)] = [start: (0, 0)]
 
-        costSoFar[start] = 0
-        while !frontier.isEmpty {
-            let current = frontier.poll()!
-            if current == end { break }
+        let average: Double = Double(grid.reduce(0, +)) / Double(grid.count)
+        let sortedGrid: [Int] = grid.sorted(by: <)
+        while let current = frontier.poll() {
+            print("---checking new point---")
+            print("cost: \(costSoFar[current]!), point: \(current)")
 
+//            if current == end { break }
             var neighbors = grid.neighbors(of: current)
 
-            let last4 = reconstructPath(in: cameFrom, start: start, goal: current, maxNodes: 4)
-            if last4.count >= 4 && last4[1...].allSatisfy({ $0.x == last4[0].x }) {
-                neighbors = neighbors.filter { $0.x != last4[0].x }
+            let last4 = reconstructPath(in: trail, start: start, goal: current, maxNodes: 4)
+            print(last4.map(String.init(describing:)).joined(separator: ", "))
+            if last4.count >= 4 {
+                if last4[1...].allSatisfy({ $0.x == last4[0].x }) {
+                    neighbors = neighbors.filter { $0.x != last4[0].x }
+                }
+
+                if last4[1...].allSatisfy({ $0.y == last4[0].y}) {
+                    neighbors = neighbors.filter { $0.y != last4[0].y }
+                }
             }
 
-            if last4.count >= 4 && last4[1...].allSatisfy({ $0.y == last4[0].y}) {
-                neighbors = neighbors.filter { $0.y != last4[0].y }
-            }
-
-            if let previous = cameFrom[current], neighbors.contains(previous) {
+            if let previous = trail[current] {
                 neighbors.remove(previous)
             }
 
-            for next in neighbors {
-                let newCost = costSoFar[current, default: 0] + grid[next]
 
-                if costSoFar[next] == nil || newCost < costSoFar[next]! {
-                    costSoFar[next] = newCost
-                    frontier.add(next, priority: newCost + heuristic(end, next))
-                    cameFrom[next] = current
+            let (steps, currentTotal) = costSoFar[current]!
+            for next in neighbors {
+                print("-checking neighbor-")
+                let newCost = currentTotal + grid[next]
+                print("cost: \(newCost), point: \(next)")
+
+                if costSoFar[next] == nil || newCost < costSoFar[next]!.total {
+                    print("found lower cost")
+                    costSoFar[next] = (steps+1, newCost)
+//                    frontier.add(
+//                        next,
+//                        priority: Double(newCost) + Double(sortedGrid.prefix(heuristic(goal, next)).reduce(0, +))
+//                    )
+                    frontier.add(next, priority: Double(newCost) + (average * Double(heuristic(goal, next))))
+                    trail[next] = current
                 }
             }
         }
 
-        return (cameFrom, costSoFar)
+        return (trail, costSoFar)
     }
 
     func solvePart2(_ input: String) -> Int {
