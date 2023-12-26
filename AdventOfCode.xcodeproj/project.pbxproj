@@ -194,12 +194,7 @@
 				57EEFCE02B1C957F0052F051 /* 2015 */,
 				576602912B19DEB7006253D9 /* 2023 */,
 				57AC47712A79CDA7003A5B5A /* main.swift */,
-				57D00AC32A7F36B6008809F9 /* Parsing.swift */,
-				576602922B19E0DB006253D9 /* Solving.swift */,
-				57C676BF2B236BF300D6F322 /* Math.swift */,
-				5788292C2B29DF3B0044D935 /* CollectionHelpers.swift */,
-				57FEEE852B36EAD4004E6B50 /* Grid.swift */,
-				57FEEE892B37A492004E6B50 /* PriorityQueue.swift */,
+				57F89BF52B3B2FB3006F79FA /* AOCKit */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -239,6 +234,19 @@
 				5784DA0B2AAA574100E668FA /* Day20.swift */,
 			);
 			path = 2015;
+			sourceTree = "<group>";
+		};
+		57F89BF52B3B2FB3006F79FA /* AOCKit */ = {
+			isa = PBXGroup;
+			children = (
+				57D00AC32A7F36B6008809F9 /* Parsing.swift */,
+				576602922B19E0DB006253D9 /* Solving.swift */,
+				57C676BF2B236BF300D6F322 /* Math.swift */,
+				5788292C2B29DF3B0044D935 /* CollectionHelpers.swift */,
+				57FEEE852B36EAD4004E6B50 /* Grid.swift */,
+				57FEEE892B37A492004E6B50 /* PriorityQueue.swift */,
+			);
+			path = AOCKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

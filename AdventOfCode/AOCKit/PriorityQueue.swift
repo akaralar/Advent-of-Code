@@ -33,8 +33,7 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
     // priority in this priority queue. If the priority
     // queue is empty null is returned.
     func peek() -> Element? {
-        if isEmpty { return nil }
-        return heap[0]
+        isEmpty ? nil : heap[0]
     }
 
     // Removes the root of the heap, O(log(n))
@@ -58,7 +57,7 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
     }
 
     // Tests the value against the predicate given at initialization.
-    // This method assumes i & j are valid indices
+    // This method assumes index1 & index2 are valid indices
     private func isLess(_ index1: Int, _ index2: Int) -> Bool {
         priorities[index1] <= priorities[index2]
     }
@@ -95,7 +94,7 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
 
             // Stop if we're outside the bounds of the tree
             // stop early if we cannot sink index anymore
-            if left >= heap.count || isLess(i, smallest) { break }
+            if left >= heap.count || isLess(i, smallest) { return }
 
             // Move down the tree following the smallest node
             swap(smallest, i)
@@ -103,36 +102,33 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
         }
     }
 
-    // Swap two nodes. Assumes i & j are valid, O(1)
+    // Swap two nodes. Assumes index1 & index2 are valid, O(1)
     mutating private func swap(_ index1: Int, _ index2: Int) {
         let value1 = heap[index1]
         let value2 = heap[index2]
-
+        
         heap[index1] = value2
         heap[index2] = value1
 
-        // Exchange the index of two nodes internally within the map
+        // Swap the priority of two nodes internally within the priorities array
+        let p1 = priorities[index1]
+        let p2 = priorities[index2]
+        
+        priorities[index1] = p2
+        priorities[index2] = p1
+
+        // Swap the index of two nodes internally within the map
         map[value1]?.remove(index1)
         map[value2]?.remove(index2)
 
         map[value1]?.insert(index2)
         map[value2]?.insert(index1)
-
-        // Exchange the priority of two nodes internally within the priorities array
-        let p1 = priorities[index1]
-        let p2 = priorities[index2]
-
-        priorities[index2] = p1
-        priorities[index1] = p2
     }
 
-    mutating func remove(value: Element) -> Bool {
-        // Logarithmic removal with map, O(log(n))
-        let index = map[value]?.first
-        if let i = index {
-            remove(at: i)
-        }
-        return index != nil
+    // Logarithmic removal with map, O(log(n))
+    mutating func remove(value: Element) {
+        guard let i = map[value]?.first else { return }
+        remove(at: i)
     }
 
     // Removes a node at particular index, O(log(n))
@@ -199,16 +195,20 @@ struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
     var endIndex: Int { heap.count }
 
     func index(after index: Int) -> Int {
-        index + 1
+        heap.index(after: index)
     }
 
     func index(before index: Int) -> Int {
-        index - 1
+        heap.index(before: index)
     }
 }
 
 extension PriorityQueue where Element == Priority {
     init(values: [Element]) {
         self.init(values: values, priorities: values)
+    }
+
+    mutating func add(_ value: Element) {
+        add(value, priority: value)
     }
 }

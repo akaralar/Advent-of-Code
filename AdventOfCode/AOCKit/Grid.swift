@@ -134,6 +134,10 @@ struct Grid<Element>: RandomAccessCollection {
         elements = string.lines.map { Array($0).map(mapping) }
     }
 
+    init<C: Collection>(_ collection: [C], mapping: (C.Element) -> Element) {
+        elements = collection.map { Array($0).map(mapping) }
+    }
+
     subscript(p: Point) -> Element {
         get { elements[p.y][p.x] }
         set { elements[p.y][p.x] = newValue }
@@ -176,6 +180,30 @@ extension Grid {
             .map(p.applying(_:))
             .filter(contains(point:))
             .reduce(into: Set<Point>()) { $0.insert($1) }
+    }
+
+    func rows() -> [[Element]] {
+        var rows: [[Element]] = []
+        for y in 0..<yEndIndex {
+            rows.append([])
+            for x in 0..<xEndIndex {
+                rows[y].append(self[Point(x: x, y: y)])
+            }
+        }
+
+        return rows
+    }
+
+    func columns() -> [[Element]] {
+        var columns: [[Element]] = []
+        for x in 0..<xEndIndex {
+            columns.append([])
+            for y in 0..<yEndIndex {
+                columns[x].append(self[Point(x: x, y: y)])
+            }
+        }
+
+        return columns
     }
 }
 
