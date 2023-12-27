@@ -3,15 +3,19 @@
 
 
 import Foundation
-import AOC2023
-import AOCKit
 
-struct SolutionRunner<S: Solving> {
+public struct SolutionRunner<S: Solving> {
     let solution: S
     let input: S.Input
 
     let clock = ContinuousClock()
-    func runBothParts() {
+
+    public init(solution: S, input: S.Input) {
+        self.solution = solution
+        self.input = input
+    }
+
+    public func runBothParts() {
         let durationPart1 = clock.measure {
             print("Part 1 answer: \(solution.solvePart1(input))")
         }

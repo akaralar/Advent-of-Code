@@ -4,6 +4,7 @@
 
 import Foundation
 import AOC2023
+import AOCKit
 
 let runner = SolutionRunner(solution: S2317(), input: testInput1)
 runner.runBothParts()
