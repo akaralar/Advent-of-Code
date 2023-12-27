@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 
 @main
-struct OPMLDiffApp: App {
+struct AdventOfCodeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
