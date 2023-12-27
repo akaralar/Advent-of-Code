@@ -13,7 +13,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(name: "AOCKit", targets: ["AOCKit"]),
         .executable(name: "AdventOfCode", targets: ["AdventOfCode"]),
-        .executable(name: "App", targets:["App"])
+        .executable(name: "AOCApp", targets:["AOCApp"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-algorithms", from: "1.2.0"),
@@ -44,9 +44,9 @@ let package = Package(
             swiftSettings: swiftSettings()
         ),
         .executableTarget(
-            name: "App",
+            name: "AOCApp",
             dependencies: years.map { .target(name: "AOC\($0)") },
-            path: "App",
+            path: "AOCApp",
             swiftSettings: swiftSettings()
         )
 

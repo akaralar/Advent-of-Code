@@ -204,11 +204,11 @@ public struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection
 }
 
 extension PriorityQueue where Element == Priority {
-    init(values: [Element]) {
+    public init(values: [Element]) {
         self.init(values: values, priorities: values)
     }
 
-    mutating func add(_ value: Element) {
+    public mutating func add(_ value: Element) {
         add(value, priority: value)
     }
 }

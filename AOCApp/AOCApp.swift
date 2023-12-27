@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 
 @main
-struct AdventOfCodeApp: App {
+struct AOCApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

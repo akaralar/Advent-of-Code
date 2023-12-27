@@ -1,7 +1,7 @@
 // Created by Ahmet Karalar for OPMLDiff in 2023
 // Using Swift 5.0
 
-
+import Foundation
 import SwiftUI
 
 struct ContentView: View {
