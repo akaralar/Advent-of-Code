@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct PriorityQueue<Element: Hashable, Priority: Comparable>: Collection {
+public struct PriorityQueue<Element: Hashable, Priority: Comparable>: RandomAccessCollection {
     private var heap: [Element] = []
     private var map: [Element: Set<Int>] = [:]
     private var priorities: [Priority] = []
