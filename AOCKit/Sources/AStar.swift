@@ -103,6 +103,28 @@ extension AStar {
         var trail: [Point: Point]
         var costSoFar: [Point: (Int, Int)]
         var queue: PriorityQueue<Point, Double>
+
+        public init(
+            current: Box,
+            neighbors: Set<Box>,
+            trail: [Point : Point],
+            costSoFar: [Point : (Int, Int)],
+            queue: PriorityQueue<Point, Double>
+        ) {
+            self.current = current
+            self.neighbors = neighbors
+            self.trail = trail
+            self.costSoFar = costSoFar
+            self.queue = queue
+        }
+
+        public static let empty = HistoryStep(
+            current: .init(point: .origin, cost: 0),
+            neighbors: [],
+            trail: [:],
+            costSoFar: [:],
+            queue: .init(values: [], priorities: [])
+        )
     }
 
     public static func findShortestPathWithHistory(
