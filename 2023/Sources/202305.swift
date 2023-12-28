@@ -30,7 +30,7 @@ extension Range where Bound == Int {
 }
 
 struct S2305: Solving {
-    func solvePart1(_ input: String) -> String {
+    func solvePart1(_ input: String) -> Int {
         var seedsAndMaps = input.split(separator: "\n\n")
         let seeds = seedsAndMaps.removeFirst().split(separator: " ").compactMap { Int($0) }
         let maps = seedsAndMaps.map {
@@ -49,10 +49,10 @@ struct S2305: Solving {
 
             minLocation = min(mappedNumber, minLocation)
         }
-        return String(minLocation)
+        return minLocation
     }
 
-    func solvePart2(_ input: String) -> String {
+    func solvePart2(_ input: String) -> Int {
         var seedsAndCategories = input.split(separator: "\n\n")
         let seedRanges = seedsAndCategories
             .removeFirst()
@@ -80,6 +80,6 @@ struct S2305: Solving {
             nextRound = nextRound.union(mapped).joinedIfContinuous()
         }
 
-        return String(nextRound.map(\.lowerBound).min()!)
+        return nextRound.map(\.lowerBound).min()!
     }
 }
