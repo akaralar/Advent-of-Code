@@ -97,42 +97,46 @@ extension AStar {
         public var cost: Int
     }
 
-    public struct HistoryStep {
+    public struct ReplayStep {
         public var current: Box
         public var neighbors: Set<Box>
         public var trail: [Point: Point]
         public var costSoFar: [Point: (Int, Int)]
         public var queue: PriorityQueue<Point, Double>
+        public var added: [(Point, Double)]
 
         public init(
             current: Box,
             neighbors: Set<Box>,
             trail: [Point : Point],
             costSoFar: [Point : (Int, Int)],
-            queue: PriorityQueue<Point, Double>
+            queue: PriorityQueue<Point, Double>,
+            added: [(Point, Double)]
         ) {
             self.current = current
             self.neighbors = neighbors
             self.trail = trail
             self.costSoFar = costSoFar
             self.queue = queue
+            self.added = added
         }
 
-        public static let empty = HistoryStep(
+        public static let empty = ReplayStep(
             current: .init(point: .origin, cost: 0),
             neighbors: [],
             trail: [:],
             costSoFar: [:],
-            queue: .init(values: [], priorities: [])
+            queue: .init(values: [], priorities: []),
+            added: []
         )
     }
 
-    public static func findShortestPathWithHistory(
+    public static func findShortestPathWithReplay(
         _ grid: Grid<Int>,
         start: Point,
         goal: Point
-    ) -> [HistoryStep] {
-        var history: [HistoryStep] = []
+    ) -> [ReplayStep] {
+        var history: [ReplayStep] = []
 
         var frontier = PriorityQueue<Point, Double>(values: [], priorities: [])
         frontier.add(start, priority: Double(grid[start]))
@@ -171,6 +175,7 @@ extension AStar {
                 neighbors.remove(previous)
             }
 
+            var added: [(Point, Double)] = []
             let (steps, currentTotal) = costSoFar[current]!
             for next in neighbors {
                 print("-checking neighbor-")
@@ -179,19 +184,23 @@ extension AStar {
 
                 if costSoFar[next] == nil || newCost < costSoFar[next]!.total {
                     print("found lower cost")
+                    let priority = Double(newCost) + (average * Double(heuristic(goal, next)))
+                    frontier.add(next, priority: priority)
+                    added.append((next, priority))
+
                     costSoFar[next] = (steps+1, newCost)
-                    frontier.add(next, priority: Double(newCost) + (average * Double(heuristic(goal, next))))
                     trail[next] = current
                 }
             }
 
             history.append(
-                HistoryStep(
+                ReplayStep(
                     current: Box(point: current, cost: grid[current]),
                     neighbors: Set(neighbors.map { Box(point: $0, cost: grid[$0])}),
                     trail: trail,
                     costSoFar: costSoFar, 
-                    queue: frontier
+                    queue: frontier,
+                    added: added
                 )
             )
         }
