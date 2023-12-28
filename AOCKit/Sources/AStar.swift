@@ -93,16 +93,16 @@ public enum AStar {
 
 extension AStar {
     public struct Box: Hashable, Equatable {
-        var point: Point
-        var cost: Int
+        public var point: Point
+        public var cost: Int
     }
 
     public struct HistoryStep {
-        var current: Box
-        var neighbors: Set<Box>
-        var trail: [Point: Point]
-        var costSoFar: [Point: (Int, Int)]
-        var queue: PriorityQueue<Point, Double>
+        public var current: Box
+        public var neighbors: Set<Box>
+        public var trail: [Point: Point]
+        public var costSoFar: [Point: (Int, Int)]
+        public var queue: PriorityQueue<Point, Double>
 
         public init(
             current: Box,
